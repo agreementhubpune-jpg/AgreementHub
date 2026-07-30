@@ -8,18 +8,24 @@
 body{
     background:#f5f7fb;
     color:#222;
-    line-height:1.6;
+    padding-top:90px;
 }
 
 /* Header */
 
 header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
     background:#0d2b5c;
     color:white;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:20px 8%;
+    z-index:1000;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
 }
 
 .logo{
@@ -80,9 +86,13 @@ nav a:hover{
     justify-content:center;
     gap:20px;
     flex-wrap:wrap;
-    margin-top:20px;
+    margin-top:35px;
+
 }
 
+.hero-buttons .btn{
+    margin:10px;
+}
 /* Buttons */
 
 .btn{
@@ -198,12 +208,6 @@ footer{
 
 /* Mobile */
 
-@media(max-width:768px){
-
-header{
-    flex-direction:column;
-}
-
 nav{
     margin-top:15px;
 }
@@ -225,4 +229,36 @@ nav a{
     flex-direction:column;
 }
 
+.card{
+    background:#fff;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
+    transition:0.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    color:#0d2b5c;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    color:#666;
+    line-height:1.6;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
+}
+
+.services{
+    background:#f8f9fc;
+}
+
+.services h2{
+    font-size:40px;
+    margin-bottom:50px;
 }
