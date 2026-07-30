@@ -337,3 +337,24 @@ nav a{
     color:#0d2b5c;
     margin-bottom:15px;
 }
+/* Statistics Section */
+
+.stats{
+    background:#0d2b5c;
+    color:white;
+    padding:70px 8%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+    text-align:center;
+}
+
+.stat-box h2{
+    font-size:42px;
+    color:#f4b400;
+    margin-bottom:10px;
+}
+
+.stat-box p{
+    font-size:18px;
+}
