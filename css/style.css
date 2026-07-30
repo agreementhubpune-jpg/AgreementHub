@@ -451,3 +451,34 @@ nav a{
     color:#0d2b5c;
     font-weight:bold;
 }
+/* FAQ */
+
+.faq{
+    padding:80px 8%;
+    background:#f8f9fc;
+}
+
+.faq h2{
+    text-align:center;
+    color:#0d2b5c;
+    margin-bottom:40px;
+    font-size:40px;
+}
+
+.faq-item{
+    background:#fff;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.faq-item h3{
+    color:#0d2b5c;
+    margin-bottom:10px;
+}
+
+.faq-item p{
+    color:#555;
+    line-height:1.7;
+}
