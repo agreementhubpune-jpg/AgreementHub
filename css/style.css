@@ -482,3 +482,58 @@ nav a{
     color:#555;
     line-height:1.7;
 }
+/* Client Form */
+
+.form-section{
+    max-width:900px;
+    margin:120px auto 80px;
+    background:#fff;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+}
+
+.form-section h2{
+    text-align:center;
+    color:#0d2b5c;
+    margin-bottom:35px;
+    font-size:36px;
+}
+
+form{
+    display:grid;
+    gap:18px;
+}
+
+form label{
+    font-weight:bold;
+    color:#0d2b5c;
+}
+
+form input,
+form textarea,
+form select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+form textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus{
+    outline:none;
+    border:2px solid #0d2b5c;
+}
+
+form button{
+    margin-top:20px;
+    cursor:pointer;
+    border:none;
+}
