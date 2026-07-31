@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/client-form.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,6 +11,102 @@
 
 </head>
 <body>
+    <header class="header">
+    <h1>Agreement Hub</h1>
+</header>
+
+<div class="container">
+
+    <h2>Client Agreement Form</h2>
+
+    <form>
+
+        <h2>Client Agreement Form</h2>
+
+<label>Agreement No</label>
+<input type="text" id="agreementNo" readonly>
+
+<label>Owner Name</label>
+<input type="text" id="ownerName" required>
+
+<label>Tenant Name</label>
+<input type="text" id="tenantName" required>
+
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
+
+<label>Property Address</label>
+<textarea id="address"></textarea>
+
+<label>Monthly Rent</label>
+<input type="number" id="rent">
+
+<label>Security Deposit</label>
+<input type="number" id="deposit">
+
+<label>Maintenance</label>
+<input type="number" id="maintenance">
+
+<label>Agreement Start Date</label>
+<input type="date" id="startDate">
+
+<label>Agreement End Date</label>
+<input type="date" id="endDate">
+
+<button type="button" onclick="saveAgreement()">
+    Save Agreement
+</button>
+
+        <div class="section">
+            <h3>Owner Details</h3>
+
+            <input type="text" placeholder="Owner Name">
+            <input type="text" placeholder="Mobile Number">
+            <input type="email" placeholder="Email">
+        </div>
+
+        <div class="section">
+            <h3>Tenant Details</h3>
+
+            <input type="text" placeholder="Tenant Name">
+            <input type="text" placeholder="Mobile Number">
+            <input type="email" placeholder="Email">
+            <input type="text" placeholder="Aadhaar Number">
+        </div>
+
+        <div class="section">
+            <h3>Property Details</h3>
+
+            <input type="text" placeholder="Property Address">
+            <input type="text" placeholder="Flat Number">
+            <input type="text" placeholder="Area">
+            <input type="text" placeholder="City">
+        </div>
+
+        <div class="section">
+            <h3>Agreement Details</h3>
+
+            <input type="number" placeholder="Monthly Rent">
+            <input type="number" placeholder="Deposit Amount">
+
+            <input type="date">
+
+            <select>
+                <option>11 Months</option>
+                <option>22 Months</option>
+                <option>33 Months</option>
+            </select>
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+            <button type="button">Generate Agreement</button>
+        </div>
+
+    </form>
+
+</div>
 
 <header>
 
@@ -76,6 +173,6 @@ Submit Agreement
 </form>
 
 </section>
-
+<script src="js/client-form.js"></script>
 </body>
 </html>

@@ -1,0 +1,94 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.header{
+    background:#0d2b5c;
+    color:#fff;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.container h2{
+    text-align:center;
+    color:#0d2b5c;
+    margin-bottom:30px;
+}
+
+.section{
+    margin-bottom:30px;
+}
+
+.section h3{
+    color:#0d2b5c;
+    margin-bottom:15px;
+}
+
+.section input,
+.section select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.buttons button{
+    padding:12px 25px;
+    border:none;
+    border-radius:8px;
+    background:#0d2b5c;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.buttons button:hover{
+    background:#f4b400;
+    color:#000;
+}
+function saveAgreement(){
+
+    const agreement = {
+        agreementNo: document.getElementById("agreementNo").value,
+        ownerName: document.getElementById("ownerName").value,
+        tenantName: document.getElementById("tenantName").value,
+        mobile: document.getElementById("mobile").value,
+        address: document.getElementById("address").value,
+        rent: document.getElementById("rent").value,
+        deposit: document.getElementById("deposit").value,
+        maintenance: document.getElementById("maintenance").value,
+        startDate: document.getElementById("startDate").value,
+        endDate: document.getElementById("endDate").value
+    };
+
+    localStorage.setItem("agreementData", JSON.stringify(agreement));
+
+    alert("Agreement Saved Successfully!");
+}
