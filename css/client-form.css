@@ -1,94 +1,70 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-body{
-    background:#f5f7fb;
-}
+    const form = document.getElementById("agreementForm");
+    const startDate = document.getElementById("startDate");
+    const duration = document.getElementById("duration");
+    const endDate = document.getElementById("endDate");
 
-.header{
-    background:#0d2b5c;
-    color:#fff;
-    text-align:center;
-    padding:20px;
-}
+    function calculateEndDate() {
 
-.container{
-    width:90%;
-    max-width:900px;
-    margin:40px auto;
-    background:#fff;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
+        if (startDate.value && duration.value) {
 
-.container h2{
-    text-align:center;
-    color:#0d2b5c;
-    margin-bottom:30px;
-}
+            let date = new Date(startDate.value);
 
-.section{
-    margin-bottom:30px;
-}
+            date.setMonth(date.getMonth() + parseInt(duration.value));
 
-.section h3{
-    color:#0d2b5c;
-    margin-bottom:15px;
-}
+            endDate.value = date.toISOString().split("T")[0];
+        }
+    }
 
-.section input,
-.section select{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:16px;
-}
+    startDate.addEventListener("change", calculateEndDate);
+    duration.addEventListener("change", calculateEndDate);
 
-.buttons{
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
+    form.addEventListener("submit", function (e) {
 
-.buttons button{
-    padding:12px 25px;
-    border:none;
-    border-radius:8px;
-    background:#0d2b5c;
-    color:#fff;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
-}
+        e.preventDefault();
 
-.buttons button:hover{
-    background:#f4b400;
-    color:#000;
-}
-function saveAgreement(){
+        const agreement = {
 
-    const agreement = {
-        agreementNo: document.getElementById("agreementNo").value,
-        ownerName: document.getElementById("ownerName").value,
-        tenantName: document.getElementById("tenantName").value,
-        mobile: document.getElementById("mobile").value,
-        address: document.getElementById("address").value,
-        rent: document.getElementById("rent").value,
-        deposit: document.getElementById("deposit").value,
-        maintenance: document.getElementById("maintenance").value,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value
-    };
+            ownerName: document.getElementById("ownerName").value,
+            ownerMobile: document.getElementById("ownerMobile").value,
+            ownerEmail: document.getElementById("ownerEmail").value,
+            ownerAadhaar: document.getElementById("ownerAadhaar").value,
+            ownerPan: document.getElementById("ownerPan").value,
 
-    localStorage.setItem("agreementData", JSON.stringify(agreement));
+            tenantName: document.getElementById("tenantName").value,
+            tenantMobile: document.getElementById("mobileNumber").value,
+            tenantEmail: document.getElementById("tenantEmail").value,
+            tenantAadhaar: document.getElementById("tenantAadhaar").value,
+            tenantPan: document.getElementById("tenantPan").value,
 
-    alert("Agreement Saved Successfully!");
-}
+            propertyAddress: document.getElementById("propertyAddress").value,
+
+            rent: document.getElementById("rent").value,
+            deposit: document.getElementById("deposit").value,
+            maintenance: document.getElementById("maintenance").value,
+
+            startDate: startDate.value,
+            endDate: endDate.value,
+            duration: duration.value
+        };
+
+        let agreements =
+            JSON.parse(localStorage.getItem("agreements")) || [];
+
+        agreements.push(agreement);
+
+        localStorage.setItem(
+            "agreements",
+            JSON.stringify(agreements)
+        );
+
+        alert("Agreement Saved Successfully!");
+
+        form.reset();
+
+        endDate.value = "";
+
+    });
+
+});

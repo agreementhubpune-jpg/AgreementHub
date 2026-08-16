@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Agreement Preview</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>
+        Agreement Preview
+    </h1>
+
+
+    <!-- Agreement Details -->
+
+    <h3>
+        Agreement Details
+    </h3>
+
+    <p>
+        <strong>Agreement No:</strong>
+        <span id="agreementNumber"></span>
+    </p>
+
+
+    <!-- Owner Details -->
+
+    <h3>
+        Owner Details
+    </h3>
+
+    <p>
+        <strong>Name:</strong>
+        <span id="ownerName"></span>
+    </p>
+
+    <p>
+        <strong>Mobile:</strong>
+        <span id="ownerMobile"></span>
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        <span id="ownerEmail"></span>
+    </p>
+
+    <p>
+        <strong>Aadhaar:</strong>
+        <span id="ownerAadhaar"></span>
+    </p>
+
+    <p>
+        <strong>PAN:</strong>
+        <span id="ownerPan"></span>
+    </p>
+
+
+    <!-- Tenant Details -->
+
+    <h3>
+        Tenant Details
+    </h3>
+
+    <p>
+        <strong>Name:</strong>
+        <span id="tenantName"></span>
+    </p>
+
+    <p>
+        <strong>Mobile:</strong>
+        <span id="tenantMobile"></span>
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        <span id="tenantEmail"></span>
+    </p>
+
+    <p>
+        <strong>Aadhaar:</strong>
+        <span id="tenantAadhaar"></span>
+    </p>
+
+    <p>
+        <strong>PAN:</strong>
+        <span id="tenantPan"></span>
+    </p>
+
+
+    <!-- Property Details -->
+
+    <h3>
+        Property Details
+    </h3>
+
+    <p>
+        <strong>Project:</strong>
+        <span id="projectName"></span>
+    </p>
+
+    <p>
+        <strong>Flat No:</strong>
+        <span id="flatNumber"></span>
+    </p>
+
+    <p>
+        <strong>Building:</strong>
+        <span id="buildingName"></span>
+    </p>
+
+    <p>
+        <strong>Wing:</strong>
+        <span id="wing"></span>
+    </p>
+
+    <p>
+        <strong>Floor:</strong>
+        <span id="floor"></span>
+    </p>
+
+    <p>
+        <strong>Built-up Area:</strong>
+        <span id="area"></span>
+        Sq.ft.
+    </p>
+
+    <p>
+        <strong>Survey No:</strong>
+        <span id="surveyNumber"></span>
+    </p>
+
+    <p>
+        <strong>CTS No:</strong>
+        <span id="ctsNumber"></span>
+    </p>
+
+    <p>
+        <strong>Village:</strong>
+        <span id="village"></span>
+    </p>
+
+    <p>
+        <strong>Taluka:</strong>
+        <span id="taluka"></span>
+    </p>
+
+    <p>
+        <strong>District:</strong>
+        <span id="district"></span>
+    </p>
+
+    <p>
+        <strong>PIN Code:</strong>
+        <span id="pinCode"></span>
+    </p>
+
+    <p>
+        <strong>Property Address:</strong>
+        <span id="propertyAddress"></span>
+    </p>
+
+
+    <!-- Agreement Financial Details -->
+
+    <h3>
+        Agreement Financial Details
+    </h3>
+
+    <p>
+        <strong>Monthly Rent:</strong>
+        ₹<span id="rent"></span>
+    </p>
+
+    <p>
+        <strong>Security Deposit:</strong>
+        ₹<span id="deposit"></span>
+    </p>
+
+    <p>
+        <strong>Maintenance:</strong>
+        ₹<span id="maintenance"></span>
+    </p>
+
+    <p>
+        <strong>Lock-in Period:</strong>
+        <span id="lockIn"></span>
+        Months
+    </p>
+
+    <p>
+        <strong>Notice Period:</strong>
+        <span id="noticePeriod"></span>
+        Days
+    </p>
+
+    <p>
+        <strong>Duration:</strong>
+        <span id="duration"></span>
+        Months
+    </p>
+
+    <p>
+        <strong>Start Date:</strong>
+        <span id="startDate"></span>
+    </p>
+
+    <p>
+        <strong>End Date:</strong>
+        <span id="endDate"></span>
+    </p>
+
+
+    <!-- Witness Details -->
+
+    <h3>
+        Witness Details
+    </h3>
+
+    <p>
+        <strong>Witness 1 Name:</strong>
+        <span id="witness1Name"></span>
+    </p>
+
+    <p>
+        <strong>Witness 1 Mobile:</strong>
+        <span id="witness1Mobile"></span>
+    </p>
+
+    <p>
+        <strong>Witness 2 Name:</strong>
+        <span id="witness2Name"></span>
+    </p>
+
+    <p>
+        <strong>Witness 2 Mobile:</strong>
+        <span id="witness2Mobile"></span>
+    </p>
+
+
+    <!-- Registration Details -->
+
+    <h3>
+        Registration Details
+    </h3>
+
+    <p>
+        <strong>Stamp Duty:</strong>
+        ₹<span id="stampDuty"></span>
+    </p>
+
+    <p>
+        <strong>Registration Fee:</strong>
+        ₹<span id="registrationFee"></span>
+    </p>
+
+    <p>
+        <strong>Agreement Charges:</strong>
+        ₹<span id="agreementCharges"></span>
+    </p>
+
+    <p>
+        <strong>Brokerage:</strong>
+        ₹<span id="brokerage"></span>
+    </p>
+
+
+    <!-- Buttons -->
+
+    <div class="preview-buttons">
+
+        <button
+            type="button"
+            onclick="window.print()"
+        >
+            Print Agreement
+        </button>
+
+
+        <button
+            type="button"
+            onclick="goToDashboard()"
+        >
+            Back to Dashboard
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<script
+    type="module"
+    src="js/agreement-preview.js"
+></script>
+
+
+</body>
+
+</html>

@@ -11,102 +11,6 @@
 
 </head>
 <body>
-    <header class="header">
-    <h1>Agreement Hub</h1>
-</header>
-
-<div class="container">
-
-    <h2>Client Agreement Form</h2>
-
-    <form>
-
-        <h2>Client Agreement Form</h2>
-
-<label>Agreement No</label>
-<input type="text" id="agreementNo" readonly>
-
-<label>Owner Name</label>
-<input type="text" id="ownerName" required>
-
-<label>Tenant Name</label>
-<input type="text" id="tenantName" required>
-
-<label>Mobile Number</label>
-<input type="tel" id="mobile" required>
-
-<label>Property Address</label>
-<textarea id="address"></textarea>
-
-<label>Monthly Rent</label>
-<input type="number" id="rent">
-
-<label>Security Deposit</label>
-<input type="number" id="deposit">
-
-<label>Maintenance</label>
-<input type="number" id="maintenance">
-
-<label>Agreement Start Date</label>
-<input type="date" id="startDate">
-
-<label>Agreement End Date</label>
-<input type="date" id="endDate">
-
-<button type="button" onclick="saveAgreement()">
-    Save Agreement
-</button>
-
-        <div class="section">
-            <h3>Owner Details</h3>
-
-            <input type="text" placeholder="Owner Name">
-            <input type="text" placeholder="Mobile Number">
-            <input type="email" placeholder="Email">
-        </div>
-
-        <div class="section">
-            <h3>Tenant Details</h3>
-
-            <input type="text" placeholder="Tenant Name">
-            <input type="text" placeholder="Mobile Number">
-            <input type="email" placeholder="Email">
-            <input type="text" placeholder="Aadhaar Number">
-        </div>
-
-        <div class="section">
-            <h3>Property Details</h3>
-
-            <input type="text" placeholder="Property Address">
-            <input type="text" placeholder="Flat Number">
-            <input type="text" placeholder="Area">
-            <input type="text" placeholder="City">
-        </div>
-
-        <div class="section">
-            <h3>Agreement Details</h3>
-
-            <input type="number" placeholder="Monthly Rent">
-            <input type="number" placeholder="Deposit Amount">
-
-            <input type="date">
-
-            <select>
-                <option>11 Months</option>
-                <option>22 Months</option>
-                <option>33 Months</option>
-            </select>
-        </div>
-
-        <div class="buttons">
-            <button type="submit">Save</button>
-            <button type="reset">Reset</button>
-            <button type="button">Generate Agreement</button>
-        </div>
-
-    </form>
-
-</div>
 
 <header>
 
@@ -127,52 +31,284 @@ Agreement Hub
 
 <h2>Client Agreement Form</h2>
 
-<form>
+<form id="agreementForm">
+
+<h3>Owner Details</h3>
 
 <label>Owner Name</label>
-<input type="text" placeholder="Enter Owner Name">
+<input type="text" id="ownerName" placeholder="Enter Owner Name" required>
+
+<label>Owner Mobile Number</label>
+<input type="tel" id="ownerMobile" placeholder="Enter Owner Mobile Number" required>
+
+<label>Owner Email</label>
+<input type="email" id="ownerEmail" placeholder="Enter Owner Email">
+
+<label>Owner Aadhaar Number</label>
+<input type="text" id="ownerAadhaar" placeholder="Enter Owner Aadhaar Number" maxlength="12">
+
+<label>Owner PAN Number</label>
+<input type="text" id="ownerPan" placeholder="Enter Owner PAN Number" maxlength="10">
+
+<label>Owner Age</label>
+<input
+    type="number"
+    id="ownerAge"
+    placeholder="Enter Owner Age"
+>
+
+<label>Owner Occupation</label>
+<input
+    type="text"
+    id="ownerOccupation"
+    placeholder="Enter Owner Occupation"
+>
+
+<label>Owner Address</label>
+<textarea
+    id="ownerAddress"
+    placeholder="Enter Owner Address"
+    rows="3"
+></textarea>
+
+<hr>
+
+<h3>Tenant Details</h3>
 
 <label>Tenant Name</label>
-<input type="text" placeholder="Enter Tenant Name">
+<input type="text" id="tenantName" placeholder="Enter Tenant Name" required>
 
-<label>Mobile Number</label>
-<input type="tel" placeholder="Enter Mobile Number">
+<label>Tenant Mobile Number</label>
+<input type="tel" id="mobileNumber" placeholder="Enter Tenant Mobile Number" required>
+
+<label>Tenant Email</label>
+<input type="email" id="tenantEmail" placeholder="Enter Tenant Email">
+
+<label>Tenant Aadhaar Number</label>
+<input type="text" id="tenantAadhaar" placeholder="Enter Tenant Aadhaar Number" maxlength="12">
+
+<label>Tenant PAN Number</label>
+<input type="text" id="tenantPan" placeholder="Enter Tenant PAN Number" maxlength="10">
+
+<label>Tenant Age</label>
+<input
+    type="number"
+    id="tenantAge"
+    placeholder="Enter Tenant Age"
+>
+
+<label>Tenant Occupation</label>
+<input
+    type="text"
+    id="tenantOccupation"
+    placeholder="Enter Tenant Occupation"
+>
+
+<label>Tenant Address</label>
+<textarea
+    id="tenantAddress"
+    placeholder="Enter Tenant Address"
+    rows="3"
+></textarea>
+
+<hr>
+
+<h3>Property Details</h3>
+
+<label>Project Name</label>
+<input type="text" id="projectName" placeholder="Enter Project Name">
+
+<label>Flat Number</label>
+<input type="text" id="flatNumber" placeholder="Enter Flat Number">
+
+<label>Building Name</label>
+<input type="text" id="buildingName" placeholder="Enter Building Name">
+
+<label>Floor</label>
+<input type="text" id="floor" placeholder="Enter Floor">
+
+<label>Built-up Area (Sq.ft.)</label>
+<input type="number" id="area" placeholder="Enter Built-up Area">
+
+<label>Survey Number</label>
+<input type="text" id="surveyNumber" placeholder="Enter Survey Number">
+
+<label>CTS Number</label>
+<input type="text" id="ctsNumber" placeholder="Enter CTS Number">
+
+<label>Village</label>
+<input type="text" id="village" placeholder="Enter Village">
+
+<label>Taluka</label>
+<input type="text" id="taluka" placeholder="Enter Taluka">
+
+<label>District</label>
+<input type="text" id="district" placeholder="Enter District">
+
+<label>PIN Code</label>
+<input type="text" id="pinCode" placeholder="Enter PIN Code">
 
 <label>Property Address</label>
-<textarea placeholder="Property Address"></textarea>
+<textarea id="propertyAddress" placeholder="Enter Full Property Address"></textarea>
 
-<label>Monthly Rent</label>
-<input type="number" placeholder="Rent">
+<hr>
 
-<label>Security Deposit</label>
-<input type="number" placeholder="Deposit">
+<h3>Agreement Details</h3>
+
+<label>Agreement Number</label>
+<input type="text" id="agreementNumber" readonly>
 
 <label>Agreement Start Date</label>
-<input type="date">
+<input type="date" id="startDate">
+
+
 
 <label>Agreement Duration</label>
 
-<select>
-
-<option>11 Months</option>
-
-<option>22 Months</option>
-
-<option>36 Months</option>
-
+<select id="duration">
+<option value="11">11 Months</option>
+<option value="22">22 Months</option>
+<option value="36">36 Months</option>
 </select>
 
+<label>Agreement End Date</label>
+<input type="date" id="endDate" readonly>
+<label>Monthly Rent</label>
+<input type="number" id="rent" placeholder="Enter Monthly Rent">
+
+<label>Security Deposit</label>
+<input type="number" id="deposit" placeholder="Enter Security Deposit">
+
+<label>Maintenance Charges</label>
+<input type="number" id="maintenance" placeholder="Enter Maintenance Charges">
+
+<label>Lock-in Period (Months)</label>
+<input type="number" id="lockIn" placeholder="Enter Lock-in Period">
+
+<label>Notice Period (Days)</label>
+<input type="number" id="noticePeriod" placeholder="Enter Notice Period">
 <br><br>
 
-<button class="btn">
+<!-- Agreement Clauses -->
 
-Submit Agreement
+<div class="form-section">
 
+    <h2>Agreement Clauses</h2>
+
+    <label>
+        <input type="checkbox" name="clause" value="period" checked>
+        Period
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="licenseFee" checked>
+        License Fee and Deposit
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="depositPayment" checked>
+        Payment of Deposit
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="maintenance" checked>
+        Maintenance Charges
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="electricity" checked>
+        Electricity Charges
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="use" checked>
+        Use of Premises
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="alteration" checked>
+        Alteration
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="noTenancy" checked>
+        No Tenancy / No Subletting
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="inspection" checked>
+        Inspection
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="cancellation" checked>
+        Cancellation / Notice
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="possession" checked>
+        Possession
+    </label>
+
+    <label>
+        <input type="checkbox" name="clause" value="registration" checked>
+        Registration
+    </label>
+
+</div>
+
+<h3>Witness Details</h3>
+
+<label>Witness 1 Name</label>
+<input type="text" id="witness1Name" placeholder="Enter Witness 1 Name">
+
+<label>Witness 1 Mobile</label>
+<input type="tel" id="witness1Mobile" placeholder="Enter Witness 1 Mobile">
+
+<label>Witness 2 Name</label>
+<input type="text" id="witness2Name" placeholder="Enter Witness 2 Name">
+
+<label>Witness 2 Mobile</label>
+<input type="tel" id="witness2Mobile" placeholder="Enter Witness 2 Mobile">
+
+<hr>
+
+<h3>Registration Details</h3>
+
+<label>Stamp Duty</label>
+<input type="number" id="stampDuty" placeholder="Enter Stamp Duty">
+
+<label>Registration Fee</label>
+<input type="number" id="registrationFee" placeholder="Enter Registration Fee">
+
+<label>Agreement Charges</label>
+<input type="number" id="agreementCharges" placeholder="Enter Agreement Charges">
+
+<label>Brokerage</label>
+<input type="number" id="brokerage" placeholder="Enter Brokerage">
+
+<input type="hidden" id="editIndex">
+
+<button type="submit" class="btn">
+Save Agreement
+</button>
+
+<button type="button" class="btn" onclick="generatePDF()">
+Generate Agreement PDF
+</button>
+
+<button type="reset" class="btn">
+Reset
 </button>
 
 </form>
 
 </section>
-<script src="js/client-form.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script type="module" src="js/client-form.js"></script>
+<script src="js/agreement-pdf.js"></script>
+    
 </body>
 </html>
