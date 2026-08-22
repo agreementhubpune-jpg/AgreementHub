@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agreement Hub - Clients</title>
+
+    <link rel="stylesheet" href="css/clients.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>Agreement Hub</h2>
+        <p>CRM Dashboard</p>
+    </div>
+
+    <ul>
+        <li><a href="dashboard.html">🏠 Dashboard</a></li>
+        <li><a href="client-form.html">➕ New Agreement</a></li>
+        <li><a href="clients.html" class="active">👥 Clients</a></li>
+        <li><a href="#">🏠 Properties</a></li>
+        <li><a href="#">💰 Payments</a></li>
+        <li><a href="#">📄 Reports</a></li>
+        <li><a href="#">⚙ Settings</a></li>
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Clients</h1>
+            <p>Manage Agreement Hub Clients</p>
+        </div>
+
+        <button onclick="window.location.href='dashboard.html'">
+            ← Dashboard
+        </button>
+
+    </div>
+
+    <div class="client-container">
+
+        <div class="form-card">
+
+            <h2>➕ Add Client</h2>
+
+            <form id="clientForm">
+
+                <label>Client Name</label>
+                <input
+                    type="text"
+                    id="clientName"
+                    placeholder="Enter Client Name"
+                    required
+                >
+
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="clientEmail"
+                    placeholder="Enter Email"
+                    required
+                >
+
+                <label>Mobile Number</label>
+                <input
+                    type="tel"
+                    id="clientMobile"
+                    placeholder="Enter Mobile Number"
+                    required
+                >
+
+                <label>Property Address</label>
+                <textarea
+                    id="propertyAddress"
+                    placeholder="Enter Property Address"
+                    required
+                ></textarea>
+
+                <label>Status</label>
+
+                <select id="clientStatus">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+
+                <button type="submit" class="save-btn">
+                    Save Client
+                </button>
+
+            </form>
+
+            <p id="clientMsg"></p>
+
+        </div>
+
+        <div class="list-card">
+
+            <h2>👥 Client List</h2>
+
+            <input
+                type="text"
+                id="clientSearch"
+                placeholder="🔍 Search Client"
+            >
+
+            <table id="clientTable">
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Property</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script
+    type="module"
+    src="js/clients.js"
+></script>
+
+</body>
+</html>

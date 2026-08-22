@@ -242,11 +242,14 @@ function getAgreementData() {
         registrationFee:
             getValue("registrationFee"),
 
-        agreementCharges:
-            getValue("agreementCharges"),
+agreementCharges:
+    getValue("agreementCharges"),
 
-        brokerage:
-            getValue("brokerage"),
+serviceCharge:
+    getValue("serviceCharge"),
+
+brokerage:
+    getValue("brokerage"),
 
 
         // ===============================
@@ -591,6 +594,9 @@ if (noticePeriodField) {
 
         document.getElementById("agreementCharges").value =
             agreement.agreementCharges || "";
+
+            document.getElementById("serviceCharge").value =
+    agreement.serviceCharge || "";
 
         document.getElementById("brokerage").value =
             agreement.brokerage || "";
@@ -1209,7 +1215,83 @@ if (noticePeriodField) {
 }
 
 // ===============================
+// Load Agreement Default Settings
+// ===============================
+
+async function loadAgreementDefaults() {
+
+    const editAgreementId =
+        localStorage.getItem("editAgreementId");
+
+    // Edit mode मध्ये defaults apply करू नका
+    if (editAgreementId) {
+        return;
+    }
+
+    try {
+
+        const settingsRef =
+            doc(
+                db,
+                "companySettings",
+                "agreementDefaults"
+            );
+
+        const settingsSnap =
+            await getDoc(settingsRef);
+
+        if (!settingsSnap.exists()) {
+            console.log("Agreement defaults not found.");
+            return;
+        }
+
+        const settings =
+            settingsSnap.data();
+
+        console.log(
+            "AGREEMENT DEFAULT SETTINGS:",
+            settings
+        );
+
+        // Default Agreement Period
+        const durationField =
+            document.getElementById("duration");
+
+        if (
+            durationField &&
+            settings.defaultAgreementPeriod
+        ) {
+
+            durationField.value =
+                String(
+                    settings.defaultAgreementPeriod
+                );
+
+        }
+
+        calculateEndDate();
+
+    } catch (error) {
+
+        console.error(
+            "Agreement Defaults Load Error:",
+            error
+        );
+
+    }
+}
+
+
+// ===============================
 // Start
 // ===============================
 
-loadEditAgreement();
+async function initializeAgreementForm() {
+
+    await loadAgreementDefaults();
+
+    await loadEditAgreement();
+
+}
+
+initializeAgreementForm();

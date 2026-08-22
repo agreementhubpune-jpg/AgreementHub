@@ -31,9 +31,13 @@
 
 <li><a href="dashboard.html" class="active">🏠 Dashboard</a></li>
 
-<li><a href="client-form.html">➕ New Agreement</a></li>
+<li>
+    <a href="client-form.html" onclick="startNewAgreement(event)">
+        ➕ New Agreement
+    </a>
+</li>
 
-<li><a href="#">👥 Clients</a></li>
+<li><a href="clients.html">👥 Clients</a></li>
 
 <li><a href="#">🏠 Properties</a></li>
 
@@ -41,7 +45,7 @@
 
 <li><a href="#">📄 Reports</a></li>
 
-<li><a href="#">⚙ Settings</a></li>
+<li><a href="settings.html">⚙ Settings</a></li>
 
 <li><a href="index.html">🌐 Website</a></li>
 
@@ -116,7 +120,7 @@
 
 <h2 id="totalRevenue">₹0</h2>
 
-<p>Total Monthly Rent</p>
+<p>Total Service Charges</p>
 
 </div>
 
@@ -231,6 +235,17 @@ placeholder="🔍 Search by Agreement No, Owner, Tenant or Mobile">
 </div>
 
 <script type="module" src="js/dashboard.js"></script>
+
+<script>
+function startNewAgreement(event) {
+
+    event.preventDefault();
+
+    localStorage.removeItem("editAgreementId");
+
+    window.location.href = "client-form.html";
+}
+</script>
 
 </body>
 </html>

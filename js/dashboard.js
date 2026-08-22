@@ -46,7 +46,7 @@ async function loadAgreements() {
 
         let activeCount = 0;
         let expiringCount = 0;
-        let totalRent = 0;
+        let totalServiceCharges = 0;
 
         const snapshot = await getDocs(
             collection(db, "agreements")
@@ -68,7 +68,9 @@ async function loadAgreements() {
 
         agreements.forEach((agreement, index) => {
 
-            totalRent += Number(agreement.rent || 0);
+            totalServiceCharges += Number(
+    agreement.serviceCharge || 0
+);
 
 
             // ===============================
@@ -214,10 +216,10 @@ async function loadAgreements() {
 
 
         document.getElementById(
-            "totalRevenue"
-        ).textContent =
-            "₹" +
-            totalRent.toLocaleString("en-IN");
+    "totalRevenue"
+).textContent =
+    "₹" +
+    totalServiceCharges.toLocaleString("en-IN");
 
 
         console.log(

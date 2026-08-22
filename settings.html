@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - Agreement Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f6fb;
+            color: #123b73;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 330px;
+            background: #123b73;
+            color: white;
+            padding: 35px 25px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .logo h1 {
+            font-size: 34px;
+            line-height: 1.15;
+        }
+
+        .logo p {
+            margin-top: 15px;
+            font-size: 17px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 18px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 19px;
+            border-radius: 12px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #ffbd00;
+            color: #111;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 45px;
+            max-width: 1500px;
+        }
+
+        .page-header {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            margin-bottom: 28px;
+        }
+
+        .page-header h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #777;
+            font-size: 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            margin-bottom: 28px;
+        }
+
+        .card h3 {
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 18px;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            color: #555;
+        }
+
+        /* Form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .form-group input,
+.form-group textarea,
+.form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+            border-color: #123b73;
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        /* Buttons */
+        button {
+            border: none;
+            padding: 14px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
+
+        .primary {
+            background: #123b73;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #0d2d59;
+        }
+
+        .yellow {
+            background: #ffbd00;
+            color: #111;
+        }
+
+        .yellow:hover {
+            background: #e9a900;
+        }
+
+        .danger {
+            background: #df4d4d;
+            color: white;
+        }
+
+        .danger:hover {
+            background: #c93d3d;
+        }
+
+        /* Messages */
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .message.success {
+            display: block;
+            background: #dff5e5;
+            color: #176b2c;
+        }
+
+        .message.error {
+            display: block;
+            background: #ffe1e1;
+            color: #a52626;
+        }
+
+        /* Password */
+        .password-form {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            background: #f6f8fc;
+            border-radius: 12px;
+        }
+
+        .password-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .password-form input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        @media(max-width: 900px) {
+            .sidebar {
+                width: 230px;
+            }
+
+            .main {
+                padding: 25px;
+            }
+        }
+
+        @media(max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .info-row {
+                display: block;
+            }
+
+            .value {
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>Agreement<br>Hub</h1>
+            <p>CRM Dashboard</p>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="client-form.html">New Agreement</a>
+            </li>
+
+            <li>
+                <a href="clients.html">Clients</a>
+            </li>
+
+            <li>
+                <a href="#">Properties</a>
+            </li>
+
+            <li>
+                <a href="#">Payments</a>
+            </li>
+
+            <li>
+                <a href="#">Reports</a>
+            </li>
+
+            <li>
+                <a href="settings.html" class="active">Settings</a>
+            </li>
+
+            <li>
+                <a href="index.html">Website</a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Header -->
+        <div class="page-header">
+
+            <h2>Settings</h2>
+
+            <p>
+                Manage your Agreement Hub CRM account and default settings
+            </p>
+
+        </div>
+
+
+        <!-- Admin Account -->
+        <div class="card">
+
+            <h3>Admin Account</h3>
+
+            <div class="info-row">
+                <span class="label">Account Type</span>
+                <span class="value">Administrator</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">Login Email</span>
+                <span class="value" id="loginEmail">
+                    Loading...
+                </span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">Authentication</span>
+                <span class="value">
+                    Email & Password
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- Business Profile -->
+        <div class="card">
+
+            <h3>Business Profile</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="businessName">
+                        Business Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="businessName"
+                        placeholder="Agreement Hub">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ownerName">
+                        Owner Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ownerName"
+                        placeholder="Enter owner name">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="mobileNumber">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="mobileNumber"
+                        placeholder="Enter mobile number">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="businessEmail">
+                        Business Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="businessEmail"
+                        placeholder="Enter business email">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="whatsappNumber">
+                        WhatsApp Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsappNumber"
+                        placeholder="Enter WhatsApp number">
+                </div>
+
+
+                <div class="form-group full">
+                    <label for="officeAddress">
+                        Office Address
+                    </label>
+
+                    <textarea
+                        id="officeAddress"
+                        placeholder="Enter office address"></textarea>
+                </div>
+
+            </div>
+
+            <button
+                class="primary"
+                type="button"
+                id="saveBusinessBtn">
+                Save Business Profile
+            </button>
+
+            <div
+                id="businessMessage"
+                class="message">
+            </div>
+
+        </div>
+
+
+        <!-- Agreement Settings -->
+        <div class="card">
+
+            <h3>Agreement Settings</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+    <label for="defaultAgreementPeriod">
+        Default Agreement Period
+    </label>
+
+    <select id="defaultAgreementPeriod">
+        <option value="11">11 Months</option>
+        <option value="22">22 Months</option>
+        <option value="33">33 Months</option>
+    </select>
+</div>
+
+
+                <div class="form-group">
+                    <label for="rentDueDate">
+                        Rent Due Date
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rentDueDate"
+                        value="5"
+                        min="1"
+                        max="31">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="defaultServiceCharge">
+                        Default Service Charge
+                    </label>
+
+                    <input
+                        type="number"
+                        id="defaultServiceCharge"
+                        value="0"
+                        min="0">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="renewalAlertDays">
+                        Renewal Alert Days
+                    </label>
+
+                    <input
+                        type="number"
+                        id="renewalAlertDays"
+                        value="30"
+                        min="1">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="defaultRentIncrease">
+                        Default Rent Increase %
+                    </label>
+
+                    <input
+                        type="number"
+                        id="defaultRentIncrease"
+                        value="10"
+                        min="0">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="defaultCity">
+                        Default City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="defaultCity"
+                        value="Pune">
+                </div>
+
+            </div>
+
+            <button
+                class="primary"
+                type="button"
+                id="saveAgreementSettingsBtn">
+                Save Agreement Settings
+            </button>
+
+            <div
+                id="agreementSettingsMessage"
+                class="message">
+            </div>
+
+        </div>
+
+
+        <!-- Security -->
+        <div class="card">
+
+            <h3>Security</h3>
+
+            <button
+                class="yellow"
+                type="button"
+                id="changePasswordBtn">
+                Change Password
+            </button>
+
+
+            <div
+                class="password-form"
+                id="passwordForm">
+
+                <label for="newPassword">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="Enter new password"
+                    minlength="6">
+
+
+                <label for="confirmPassword">
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm new password"
+                    minlength="6">
+
+
+                <button
+                    class="primary"
+                    type="button"
+                    id="savePasswordBtn">
+                    Save Password
+                </button>
+
+                <button
+                    class="danger"
+                    type="button"
+                    id="cancelPasswordBtn">
+                    Cancel
+                </button>
+
+                <div
+                    id="passwordMessage"
+                    class="message">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Account Actions -->
+        <div class="card">
+
+            <h3>Account Actions</h3>
+
+            <button
+                class="primary"
+                type="button"
+                id="dashboardBtn">
+                Back to Dashboard
+            </button>
+
+            <button
+                class="danger"
+                type="button"
+                id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script type="module">
+
+    import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+
+
+    import {
+        getAuth,
+        onAuthStateChanged,
+        updatePassword,
+        signOut
+    }
+    from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+
+    import {
+        getFirestore,
+        doc,
+        getDoc,
+        setDoc
+    }
+    from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+
+    /*
+    ========================================
+    FIREBASE CONFIG
+    ========================================
+    */
+
+    const firebaseConfig = {
+
+        apiKey:
+        "AIzaSyCTMlS9-mstxijR5CRnj9DIAARvscRTT_M",
+
+        authDomain:
+        "agreement-hub-e1bd1.firebaseapp.com",
+
+        projectId:
+        "agreement-hub-e1bd1",
+
+        storageBucket:
+        "agreement-hub-e1bd1.firebasestorage.app",
+
+        messagingSenderId:
+        "28620421891",
+
+        appId:
+        "1:28620421891:web:c861b74d6095426988c736"
+
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getFirestore(app);
+
+
+    /*
+    ========================================
+    MESSAGE FUNCTION
+    ========================================
+    */
+
+    function showMessage(element, text, type) {
+
+        element.textContent = text;
+
+        element.className =
+            "message " + type;
+
+    }
+
+
+    function hideMessage(element) {
+
+        element.textContent = "";
+
+        element.className = "message";
+
+    }
+
+
+    /*
+    ========================================
+    BUSINESS PROFILE
+    ========================================
+    */
+
+    const businessFields = [
+
+        "businessName",
+        "ownerName",
+        "mobileNumber",
+        "businessEmail",
+        "whatsappNumber",
+        "officeAddress"
+
+    ];
+
+
+    const saveBusinessBtn =
+        document.getElementById(
+            "saveBusinessBtn"
+        );
+
+
+    const businessMessage =
+        document.getElementById(
+            "businessMessage"
+        );
+
+
+    async function loadBusinessProfile() {
+
+        try {
+
+            const profileRef =
+                doc(
+                    db,
+                    "companySettings",
+                    "profile"
+                );
+
+
+            const profileSnap =
+                await getDoc(profileRef);
+
+
+            if (profileSnap.exists()) {
+
+                const data =
+                    profileSnap.data();
+
+
+                businessFields.forEach(
+                    (field) => {
+
+                        const element =
+                            document.getElementById(
+                                field
+                            );
+
+
+                        if (
+                            element &&
+                            data[field] !== undefined
+                        ) {
+
+                            element.value =
+                                data[field];
+
+                        }
+
+                    }
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Business profile load error:",
+                error
+            );
+
+
+            showMessage(
+                businessMessage,
+                "Business profile load failed.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    saveBusinessBtn.addEventListener(
+        "click",
+        async () => {
+
+            const user =
+                auth.currentUser;
+
+
+            if (!user) {
+
+                showMessage(
+                    businessMessage,
+                    "Please login again.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const data = {};
+
+
+            businessFields.forEach(
+                (field) => {
+
+                    data[field] =
+                        document
+                        .getElementById(field)
+                        .value
+                        .trim();
+
+                }
+            );
+
+
+            if (!data.businessName) {
+
+                showMessage(
+                    businessMessage,
+                    "Please enter Business Name.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                saveBusinessBtn.disabled =
+                    true;
+
+                saveBusinessBtn.textContent =
+                    "Saving...";
+
+
+                await setDoc(
+
+                    doc(
+                        db,
+                        "companySettings",
+                        "profile"
+                    ),
+
+                    {
+                        ...data,
+
+                        updatedBy:
+                            user.uid,
+
+                        updatedAt:
+                            new Date()
+                            .toISOString()
+                    },
+
+                    {
+                        merge: true
+                    }
+
+                );
+
+
+                showMessage(
+                    businessMessage,
+                    "Business Profile saved successfully.",
+                    "success"
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    businessMessage,
+                    error.message ||
+                    "Unable to save Business Profile.",
+                    "error"
+                );
+
+
+            } finally {
+
+                saveBusinessBtn.disabled =
+                    false;
+
+                saveBusinessBtn.textContent =
+                    "Save Business Profile";
+
+            }
+
+        }
+    );
+
+
+    /*
+    ========================================
+    AGREEMENT SETTINGS
+    ========================================
+    */
+
+    const agreementFields = [
+
+        "defaultAgreementPeriod",
+        "rentDueDate",
+        "defaultServiceCharge",
+        "renewalAlertDays",
+        "defaultRentIncrease",
+        "defaultCity"
+
+    ];
+
+
+    const saveAgreementSettingsBtn =
+        document.getElementById(
+            "saveAgreementSettingsBtn"
+        );
+
+
+    const agreementSettingsMessage =
+        document.getElementById(
+            "agreementSettingsMessage"
+        );
+
+
+    async function loadAgreementSettings() {
+
+        try {
+
+            const settingsRef =
+                doc(
+                    db,
+                    "companySettings",
+                    "agreementDefaults"
+                );
+
+
+            const settingsSnap =
+                await getDoc(settingsRef);
+
+
+            if (settingsSnap.exists()) {
+
+                const data =
+                    settingsSnap.data();
+
+
+                agreementFields.forEach(
+                    (field) => {
+
+                        const element =
+                            document.getElementById(
+                                field
+                            );
+
+
+                        if (
+                            element &&
+                            data[field] !== undefined
+                        ) {
+
+                            element.value =
+                                data[field];
+
+                        }
+
+                    }
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Agreement settings load error:",
+                error
+            );
+
+
+            showMessage(
+                agreementSettingsMessage,
+                "Agreement Settings load failed.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    saveAgreementSettingsBtn.addEventListener(
+        "click",
+        async () => {
+
+            const user =
+                auth.currentUser;
+
+
+            if (!user) {
+
+                showMessage(
+                    agreementSettingsMessage,
+                    "Please login again.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const data = {
+
+                defaultAgreementPeriod:
+                    Number(
+                        document.getElementById(
+                            "defaultAgreementPeriod"
+                        ).value
+                    ),
+
+                rentDueDate:
+                    Number(
+                        document.getElementById(
+                            "rentDueDate"
+                        ).value
+                    ),
+
+                defaultServiceCharge:
+                    Number(
+                        document.getElementById(
+                            "defaultServiceCharge"
+                        ).value
+                    ),
+
+                renewalAlertDays:
+                    Number(
+                        document.getElementById(
+                            "renewalAlertDays"
+                        ).value
+                    ),
+
+                defaultRentIncrease:
+                    Number(
+                        document.getElementById(
+                            "defaultRentIncrease"
+                        ).value
+                    ),
+
+                defaultCity:
+                    document.getElementById(
+                        "defaultCity"
+                    ).value.trim()
+
+            };
+
+
+            if (
+                data.defaultAgreementPeriod < 1
+            ) {
+
+                showMessage(
+                    agreementSettingsMessage,
+                    "Agreement Period must be at least 1 month.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                data.rentDueDate < 1 ||
+                data.rentDueDate > 31
+            ) {
+
+                showMessage(
+                    agreementSettingsMessage,
+                    "Rent Due Date must be between 1 and 31.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                saveAgreementSettingsBtn.disabled =
+                    true;
+
+                saveAgreementSettingsBtn.textContent =
+                    "Saving...";
+
+
+                await setDoc(
+
+                    doc(
+                        db,
+                        "companySettings",
+                        "agreementDefaults"
+                    ),
+
+                    {
+                        ...data,
+
+                        updatedBy:
+                            user.uid,
+
+                        updatedAt:
+                            new Date()
+                            .toISOString()
+                    },
+
+                    {
+                        merge: true
+                    }
+
+                );
+
+
+                showMessage(
+                    agreementSettingsMessage,
+                    "Agreement Settings saved successfully.",
+                    "success"
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    agreementSettingsMessage,
+                    error.message ||
+                    "Unable to save Agreement Settings.",
+                    "error"
+                );
+
+
+            } finally {
+
+                saveAgreementSettingsBtn.disabled =
+                    false;
+
+                saveAgreementSettingsBtn.textContent =
+                    "Save Agreement Settings";
+
+            }
+
+        }
+    );
+
+
+    /*
+    ========================================
+    AUTHENTICATION
+    ========================================
+    */
+
+    const loginEmail =
+        document.getElementById(
+            "loginEmail"
+        );
+
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+            if (user) {
+
+                loginEmail.textContent =
+                    user.email ||
+                    "Email not available";
+
+
+                await loadBusinessProfile();
+
+                await loadAgreementSettings();
+
+
+            } else {
+
+                loginEmail.textContent =
+                    "Not logged in";
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+    );
+
+
+    /*
+    ========================================
+    CHANGE PASSWORD
+    ========================================
+    */
+
+    const changePasswordBtn =
+        document.getElementById(
+            "changePasswordBtn"
+        );
+
+
+    const passwordForm =
+        document.getElementById(
+            "passwordForm"
+        );
+
+
+    const cancelPasswordBtn =
+        document.getElementById(
+            "cancelPasswordBtn"
+        );
+
+
+    const savePasswordBtn =
+        document.getElementById(
+            "savePasswordBtn"
+        );
+
+
+    const passwordMessage =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+
+    changePasswordBtn.addEventListener(
+        "click",
+        () => {
+
+            passwordForm.style.display =
+                "block";
+
+            changePasswordBtn.style.display =
+                "none";
+
+        }
+    );
+
+
+    cancelPasswordBtn.addEventListener(
+        "click",
+        () => {
+
+            passwordForm.style.display =
+                "none";
+
+            changePasswordBtn.style.display =
+                "inline-block";
+
+
+            document.getElementById(
+                "newPassword"
+            ).value = "";
+
+
+            document.getElementById(
+                "confirmPassword"
+            ).value = "";
+
+
+            hideMessage(
+                passwordMessage
+            );
+
+        }
+    );
+
+
+    savePasswordBtn.addEventListener(
+        "click",
+        async () => {
+
+            const newPassword =
+                document
+                .getElementById(
+                    "newPassword"
+                )
+                .value
+                .trim();
+
+
+            const confirmPassword =
+                document
+                .getElementById(
+                    "confirmPassword"
+                )
+                .value
+                .trim();
+
+
+            if (
+                !newPassword ||
+                !confirmPassword
+            ) {
+
+                showMessage(
+                    passwordMessage,
+                    "Please enter both password fields.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                newPassword.length < 6
+            ) {
+
+                showMessage(
+                    passwordMessage,
+                    "Password must be at least 6 characters.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                newPassword !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    passwordMessage,
+                    "Passwords do not match.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const user =
+                auth.currentUser;
+
+
+            if (!user) {
+
+                showMessage(
+                    passwordMessage,
+                    "User is not logged in.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                savePasswordBtn.disabled =
+                    true;
+
+                savePasswordBtn.textContent =
+                    "Saving...";
+
+
+                await updatePassword(
+                    user,
+                    newPassword
+                );
+
+
+                showMessage(
+                    passwordMessage,
+                    "Password changed successfully.",
+                    "success"
+                );
+
+
+                document.getElementById(
+                    "newPassword"
+                ).value = "";
+
+
+                document.getElementById(
+                    "confirmPassword"
+                ).value = "";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                if (
+                    error.code ===
+                    "auth/requires-recent-login"
+                ) {
+
+                    showMessage(
+                        passwordMessage,
+                        "Please Logout and Login again before changing your password.",
+                        "error"
+                    );
+
+                } else {
+
+                    showMessage(
+                        passwordMessage,
+                        error.message,
+                        "error"
+                    );
+
+                }
+
+
+            } finally {
+
+                savePasswordBtn.disabled =
+                    false;
+
+                savePasswordBtn.textContent =
+                    "Save Password";
+
+            }
+
+        }
+    );
+
+
+    /*
+    ========================================
+    DASHBOARD
+    ========================================
+    */
+
+    document
+        .getElementById(
+            "dashboardBtn"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }
+        );
+
+
+    /*
+    ========================================
+    LOGOUT
+    ========================================
+    */
+
+    document
+        .getElementById(
+            "logoutBtn"
+        )
+        .addEventListener(
+            "click",
+            async () => {
+
+                try {
+
+                    await signOut(auth);
+
+                    window.location.href =
+                        "login.html";
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert(
+                        "Logout failed. Please try again."
+                    );
+
+                }
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
