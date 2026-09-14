@@ -1,70 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-    const form = document.getElementById("agreementForm");
-    const startDate = document.getElementById("startDate");
-    const duration = document.getElementById("duration");
-    const endDate = document.getElementById("endDate");
-
-    function calculateEndDate() {
-
-        if (startDate.value && duration.value) {
-
-            let date = new Date(startDate.value);
-
-            date.setMonth(date.getMonth() + parseInt(duration.value));
-
-            endDate.value = date.toISOString().split("T")[0];
-        }
-    }
-
-    startDate.addEventListener("change", calculateEndDate);
-    duration.addEventListener("change", calculateEndDate);
-
-    form.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        const agreement = {
-
-            ownerName: document.getElementById("ownerName").value,
-            ownerMobile: document.getElementById("ownerMobile").value,
-            ownerEmail: document.getElementById("ownerEmail").value,
-            ownerAadhaar: document.getElementById("ownerAadhaar").value,
-            ownerPan: document.getElementById("ownerPan").value,
-
-            tenantName: document.getElementById("tenantName").value,
-            tenantMobile: document.getElementById("mobileNumber").value,
-            tenantEmail: document.getElementById("tenantEmail").value,
-            tenantAadhaar: document.getElementById("tenantAadhaar").value,
-            tenantPan: document.getElementById("tenantPan").value,
-
-            propertyAddress: document.getElementById("propertyAddress").value,
-
-            rent: document.getElementById("rent").value,
-            deposit: document.getElementById("deposit").value,
-            maintenance: document.getElementById("maintenance").value,
-
-            startDate: startDate.value,
-            endDate: endDate.value,
-            duration: duration.value
-        };
-
-        let agreements =
-            JSON.parse(localStorage.getItem("agreements")) || [];
-
-        agreements.push(agreement);
-
-        localStorage.setItem(
-            "agreements",
-            JSON.stringify(agreements)
-        );
-
-        alert("Agreement Saved Successfully!");
-
-        form.reset();
-
-        endDate.value = "";
-
-    });
-
-});
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172b4d}
+.form-header{display:flex;justify-content:space-between;align-items:center;background:#123b73;color:#fff;padding:16px 5%}.brand{font-weight:700;font-size:24px}.form-header a{color:#fff;text-decoration:none;margin-left:18px}
+.form-shell{max-width:1150px;margin:28px auto;padding:0 18px 50px}.form-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.form-title h1{margin:0}.form-title p{color:#667085}.back-link{color:#123b73;text-decoration:none;font-weight:700}
+.section-card{background:#fff;padding:24px;border-radius:14px;box-shadow:0 5px 20px rgba(0,0,0,.05);margin-bottom:18px}.section-card h2{margin-top:0;color:#123b73}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.field.full{grid-column:1/-1}.field label{display:block;font-weight:700;margin-bottom:7px}.field input,.field textarea,.field select,.section-card select{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:8px;font-size:15px}
+.field textarea{min-height:90px;resize:vertical}.clause-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.clause-grid label{padding:10px;background:#f8fafc;border-radius:8px}.note{font-size:13px;color:#667085;background:#f8fafc;padding:10px 12px;border-radius:8px}
+.internal-card{border:2px solid #ffbd00}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions button{padding:13px 20px;border:0;border-radius:8px;cursor:pointer;background:#e5e7eb}.actions .primary{background:#123b73;color:white}
+@media(max-width:700px){.grid,.clause-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.form-title{align-items:flex-start;gap:10px;flex-direction:column}}

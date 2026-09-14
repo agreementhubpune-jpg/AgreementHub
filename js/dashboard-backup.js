@@ -279,15 +279,9 @@ async function loadAgreements() {
 
         let expiredCount = 0;
 
-        let totalBusinessCharges = 0;
+        let totalServiceCharges = 0;
 
-let totalAmountReceived = 0;
-
-let totalPendingAmount = 0;
-
-let fullyPaidCount = 0;
-
-let todayCount = 0;
+        let todayCount = 0;
 
 
         const renewalAlerts = [];
@@ -360,53 +354,14 @@ let todayCount = 0;
                 }
 
 
-                const serviceCharge =
-    Number(
-        agreement.serviceCharge ||
-        0
-    );
+                // Revenue
+                // ONLY My Service Charge
 
-const brokerage =
-    Number(
-        agreement.brokerage ||
-        0
-    );
-
-const businessDue =
-    serviceCharge +
-    brokerage;
-
-const amountReceived =
-    Math.min(
-        Number(
-            agreement.amountReceived ||
-            0
-        ),
-        businessDue
-    );
-
-const pendingAmount =
-    Math.max(
-        businessDue -
-        amountReceived,
-        0
-    );
-
-totalBusinessCharges +=
-    businessDue;
-
-totalAmountReceived +=
-    amountReceived;
-
-totalPendingAmount +=
-    pendingAmount;
-
-if (
-    businessDue > 0 &&
-    amountReceived >= businessDue
-) {
-    fullyPaidCount++;
-}
+                totalServiceCharges +=
+                    Number(
+                        agreement.serviceCharge ||
+                        0
+                    );
 
 
                 // Today's Agreements
@@ -469,36 +424,13 @@ if (
 
 
         document.getElementById(
-    "totalRevenue"
-).textContent =
-    "₹" +
-    totalBusinessCharges.toLocaleString(
-        "en-IN"
-    );
-
-
-document.getElementById(
-    "amountReceived"
-).textContent =
-    "₹" +
-    totalAmountReceived.toLocaleString(
-        "en-IN"
-    );
-
-
-document.getElementById(
-    "pendingAmount"
-).textContent =
-    "₹" +
-    totalPendingAmount.toLocaleString(
-        "en-IN"
-    );
-
-
-document.getElementById(
-    "fullyPaid"
-).textContent =
-    fullyPaidCount;
+            "totalRevenue"
+        ).textContent =
+            "₹" +
+            totalServiceCharges
+                .toLocaleString(
+                    "en-IN"
+                );
 
 
         renderRenewalAlerts(

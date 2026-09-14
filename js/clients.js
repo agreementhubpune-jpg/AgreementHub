@@ -1,159 +1,331 @@
-import { db, auth } from "./firebase.js";
+// ==========================================
+// AGREEMENT HUB - CLIENTS
+// ==========================================
+
+import {
+    db,
+    auth
+} from "./firebase.js";
+
 
 import {
     collection,
-    addDoc,
-    getDocs
+    getDocs,
+    doc,
+    getDoc,
+    setDoc
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
 
 import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
 
-const clientForm =
-    document.getElementById("clientForm");
+const form =
+    document.getElementById(
+        "clientForm"
+    );
 
-const clientMsg =
-    document.getElementById("clientMsg");
+
+const message =
+    document.getElementById(
+        "clientMsg"
+    );
+
 
 const tbody =
-    document.querySelector("#clientTable tbody");
+    document.querySelector(
+        "#clientTable tbody"
+    );
 
-const clientSearch =
-    document.getElementById("clientSearch");
+
+const searchInput =
+    document.getElementById(
+        "clientSearch"
+    );
 
 
 let clients = [];
 
 
-// ===============================
-// AUTHENTICATION
-// ===============================
+// ==========================================
+// LOGIN
+// ==========================================
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(
+    auth,
+    async user => {
 
-    if (!user) {
+        if (!user) {
 
-        window.location.href = "login.html";
+            window.location.href =
+                "login.html";
 
-        return;
-    }
+            return;
 
-    loadClients();
+        }
 
-});
-
-
-// ===============================
-// SAVE CLIENT
-// ===============================
-
-clientForm.addEventListener("submit", async function (e) {
-
-    e.preventDefault();
-
-    const client = {
-
-        clientName:
-            document.getElementById("clientName").value.trim(),
-
-        email:
-            document.getElementById("clientEmail").value.trim(),
-
-        mobile:
-            document.getElementById("clientMobile").value.trim(),
-
-        propertyAddress:
-            document.getElementById("propertyAddress").value.trim(),
-
-        status:
-            document.getElementById("clientStatus").value,
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    try {
-
-        await addDoc(
-            collection(db, "clients"),
-            client
-        );
-
-        clientMsg.innerText =
-            "Client Saved Successfully!";
-
-        clientMsg.style.color = "green";
-
-        clientForm.reset();
 
         await loadClients();
 
     }
+);
 
-    catch (error) {
 
-        console.error(
-            "Client Save Error:",
-            error
-        );
+// ==========================================
+// NORMALIZE MOBILE
+// ==========================================
 
-        clientMsg.innerText =
-            "Client Save Failed: " +
-            error.message;
+function normalizeMobile(
+    mobile
+) {
 
-        clientMsg.style.color = "red";
+    return String(
+        mobile || ""
+    ).replace(
+        /\D/g,
+        ""
+    );
+
+}
+
+
+// ==========================================
+// MANUAL ADD / UPDATE CLIENT
+// ==========================================
+
+form.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const clientName =
+            document.getElementById(
+                "clientName"
+            ).value.trim();
+
+
+        const email =
+            document.getElementById(
+                "clientEmail"
+            ).value.trim();
+
+
+        const mobile =
+            normalizeMobile(
+                document.getElementById(
+                    "clientMobile"
+                ).value
+            );
+
+
+        const propertyAddress =
+            document.getElementById(
+                "propertyAddress"
+            ).value.trim();
+
+
+        const status =
+            document.getElementById(
+                "clientStatus"
+            ).value;
+
+
+        if (
+            !clientName ||
+            !mobile
+        ) {
+
+            message.style.color =
+                "red";
+
+
+            message.textContent =
+                "Client Name and Mobile Number are required.";
+
+
+            return;
+
+        }
+
+
+        try {
+
+            const clientRef =
+                doc(
+                    db,
+                    "clients",
+                    mobile
+                );
+
+
+            const existingClient =
+                await getDoc(
+                    clientRef
+                );
+
+
+            const clientData = {
+
+                clientName:
+                    clientName,
+
+                mobile:
+                    mobile,
+
+                email:
+                    email,
+
+                propertyAddress:
+                    propertyAddress,
+
+                status:
+                    status,
+
+                updatedAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+
+            if (
+                !existingClient.exists()
+            ) {
+
+                clientData.createdAt =
+                    new Date()
+                        .toISOString();
+
+            }
+
+
+            await setDoc(
+
+                clientRef,
+
+                clientData,
+
+                {
+                    merge: true
+                }
+
+            );
+
+
+            message.style.color =
+                "green";
+
+
+            message.textContent =
+                existingClient.exists()
+                    ?
+                    "Client Updated Successfully!"
+                    :
+                    "Client Saved Successfully!";
+
+
+            form.reset();
+
+
+            await loadClients();
+
+
+        } catch (error) {
+
+            console.error(
+                "CLIENT SAVE ERROR:",
+                error
+            );
+
+
+            message.style.color =
+                "red";
+
+
+            message.textContent =
+                "Client Save Failed: " +
+                error.message;
+
+        }
 
     }
+);
 
-});
 
-
-// ===============================
+// ==========================================
 // LOAD CLIENTS
-// ===============================
+// ==========================================
 
 async function loadClients() {
 
     try {
 
-        clients = [];
-
-        tbody.innerHTML = "";
-
         const snapshot =
             await getDocs(
-                collection(db, "clients")
+                collection(
+                    db,
+                    "clients"
+                )
             );
 
-        snapshot.forEach((docSnap) => {
 
-            clients.push({
+        clients =
+            snapshot.docs.map(
+                document => {
 
-                id: docSnap.id,
+                    return {
 
-                ...docSnap.data()
+                        id:
+                            document.id,
 
-            });
+                        ...document.data()
 
-        });
+                    };
 
-        displayClients(clients);
+                }
+            );
 
-        console.log(
-            "Clients loaded:",
-            clients
+
+        clients.sort(
+            (
+                a,
+                b
+            ) => {
+
+                const nameA =
+                    String(
+                        a.clientName ||
+                        ""
+                    ).toLowerCase();
+
+
+                const nameB =
+                    String(
+                        b.clientName ||
+                        ""
+                    ).toLowerCase();
+
+
+                return nameA
+                    .localeCompare(
+                        nameB
+                    );
+
+            }
         );
 
-    }
 
-    catch (error) {
+        renderClients();
+
+
+    } catch (error) {
 
         console.error(
-            "Client Load Error:",
+            "CLIENT LOAD ERROR:",
             error
         );
 
@@ -162,74 +334,552 @@ async function loadClients() {
 }
 
 
-// ===============================
-// DISPLAY CLIENTS
-// ===============================
+// ==========================================
+// RENDER CLIENT TABLE
+// ==========================================
 
-function displayClients(clientList) {
+function renderClients() {
+
+    const searchValue =
+        searchInput
+            .value
+            .trim()
+            .toLowerCase();
+
 
     tbody.innerHTML = "";
 
-    clientList.forEach((client) => {
 
-        const row =
-            document.createElement("tr");
+    clients.forEach(
+        client => {
 
-        row.innerHTML = `
 
-            <td>
-                ${client.clientName || "-"}
-            </td>
+            const project =
+                client.projectName ||
+                client.propertyAddress ||
+                "-";
 
-            <td>
-                ${client.email || "-"}
-            </td>
 
-            <td>
-                ${client.mobile || "-"}
-            </td>
+            const searchableText =
+                [
 
-            <td>
-                ${client.propertyAddress || "-"}
-            </td>
+                    client.clientName,
 
-            <td>
-                ${client.status || "-"}
-            </td>
+                    client.email,
 
-        `;
+                    client.mobile,
 
-        tbody.appendChild(row);
+                    client.projectName,
 
-    });
+                    client.propertyAddress,
+
+                    client.lastAgreementNo,
+
+                    client.status
+
+                ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+            if (
+                searchValue &&
+                !searchableText
+                    .includes(
+                        searchValue
+                    )
+            ) {
+
+                return;
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            /*
+                Current clients.html has:
+
+                Name
+                Email
+                Mobile
+                Property
+                Status
+
+                त्यामुळे lastAgreementNo data
+                Firestore मध्ये save राहतो.
+                पुढे HTML table मध्ये वेगळा
+                column add करू शकतो.
+            */
+
+            row.innerHTML = `
+
+                <td>
+                    ${
+                        escapeHtml(
+                            client.clientName ||
+                            "-"
+                        )
+                    }
+                </td>
+
+                <td>
+                    ${
+                        escapeHtml(
+                            client.email ||
+                            "-"
+                        )
+                    }
+                </td>
+
+                <td>
+                    ${
+                        escapeHtml(
+                            client.mobile ||
+                            "-"
+                        )
+                    }
+                </td>
+
+                <td
+                    title="${
+                        escapeHtml(
+                            client.lastAgreementNo ||
+                            ""
+                        )
+                    }"
+                >
+                    ${
+                        escapeHtml(
+                            project
+                        )
+                    }
+                </td>
+
+                <td>
+                    ${
+                        escapeHtml(
+                            client.status ||
+                            "Active"
+                        )
+                    }
+                </td>
+<td>
+    <button
+        type="button"
+        class="profile-btn"
+        data-mobile="${escapeHtml(client.mobile || "")}"
+    >
+        View Client
+    </button>
+</td>
+            `;
+
+
+            tbody.appendChild(
+                row
+            );
+
+        }
+    );
 
 }
 
+// ==========================================
+// CLIENT PROFILE
+// ==========================================
 
-// ===============================
-// SEARCH
-// ===============================
+tbody.addEventListener("click", async event => {
 
-clientSearch.addEventListener("keyup", function () {
+    const button =
+        event.target.closest(".profile-btn");
 
-    const value =
-        this.value.toLowerCase().trim();
+    if (!button) {
+        return;
+    }
 
-    const filtered =
-        clients.filter((client) => {
+    const mobile =
+        normalizeMobile(
+            button.dataset.mobile
+        );
 
-            const text = `
-                ${client.clientName || ""}
-                ${client.email || ""}
-                ${client.mobile || ""}
-                ${client.propertyAddress || ""}
-                ${client.status || ""}
-            `.toLowerCase();
+    const client =
+        clients.find(
+            item =>
+                normalizeMobile(item.mobile) === mobile
+        );
 
-            return text.includes(value);
+    if (!client) {
+        return;
+    }
+
+    const profilePanel =
+        document.getElementById("profilePanel");
+
+    document.getElementById("profileTitle").textContent =
+        (client.clientName || "Client") + " - Profile";
+
+    document.getElementById("profileName").textContent =
+        client.clientName || "-";
+
+    document.getElementById("profileMobile").textContent =
+        client.mobile || "-";
+
+    document.getElementById("profileEmail").textContent =
+        client.email || "-";
+
+    document.getElementById("profileProperty").textContent =
+        client.projectName ||
+        client.propertyAddress ||
+        "-";
+
+    document.getElementById("profileStatus").textContent =
+        client.status || "Active";
+
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "agreements")
+            );
+
+        const agreements =
+            snapshot.docs
+                .map(document => ({
+                    id: document.id,
+                    ...document.data()
+                }))
+                .filter(agreement =>
+                    normalizeMobile(
+                        agreement.mobile ||
+                        agreement.tenantMobile
+                    ) === mobile
+                );
+
+
+        let activeCount = 0;
+        let expiredCount = 0;
+        let totalPending = 0;
+        let latestEndDate = "";
+
+
+        agreements.forEach(agreement => {
+
+            const endDate =
+                agreement.endDate || "";
+
+            if (
+                endDate &&
+                new Date(endDate) < new Date()
+            ) {
+
+                expiredCount++;
+
+            } else {
+
+                activeCount++;
+
+            }
+
+
+            if (
+                endDate &&
+                (
+                    !latestEndDate ||
+                    endDate > latestEndDate
+                )
+            ) {
+
+                latestEndDate =
+                    endDate;
+
+            }
+
+
+            const businessDue =
+                Number(
+                    agreement.serviceCharge || 0
+                ) +
+                Number(
+                    agreement.brokerage || 0
+                );
+
+            const received =
+                Math.min(
+                    Number(
+                        agreement.amountReceived || 0
+                    ),
+                    businessDue
+                );
+
+            totalPending +=
+                Math.max(
+                    businessDue - received,
+                    0
+                );
 
         });
 
-    displayClients(filtered);
+
+        document.getElementById(
+            "profileTotalAgreements"
+        ).textContent =
+            agreements.length;
+
+        document.getElementById(
+            "profileActiveAgreements"
+        ).textContent =
+            activeCount;
+
+        document.getElementById(
+            "profileExpiredAgreements"
+        ).textContent =
+            expiredCount;
+
+        document.getElementById(
+            "profileEndDate"
+        ).textContent =
+            latestEndDate || "-";
+
+        document.getElementById(
+            "profilePending"
+        ).textContent =
+            totalPending.toLocaleString("en-IN");
+
+
+        profilePanel.style.display =
+            "block";
+
+        profilePanel.scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "CLIENT PROFILE ERROR:",
+            error
+        );
+
+        alert(
+            "Unable to load client profile."
+        );
+
+    }
 
 });
+
+// ==========================================
+// CLIENT AGREEMENT HISTORY
+// ==========================================
+
+tbody.addEventListener("click", async event => {
+
+    const button =
+        event.target.closest(".history-btn, .profile-btn");
+
+    if (!button) {
+        return;
+    }
+
+    const mobile =
+        normalizeMobile(
+            button.dataset.mobile
+        );
+
+    const client =
+        clients.find(
+            item =>
+                normalizeMobile(item.mobile) === mobile
+        );
+
+    const historyPanel =
+        document.getElementById("historyPanel");
+
+    const historyTitle =
+        document.getElementById("historyTitle");
+
+    const historyBody =
+        document.querySelector(
+            "#historyTable tbody"
+        );
+
+    historyPanel.style.display = "block";
+
+    historyTitle.textContent =
+        (client?.clientName || "Client") +
+        " - Agreement History";
+
+    historyBody.innerHTML =
+        '<tr><td colspan="6">Loading...</td></tr>';
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "agreements")
+            );
+
+        const agreements =
+            snapshot.docs
+                .map(document => ({
+                    id: document.id,
+                    ...document.data()
+                }))
+                .filter(agreement =>
+    normalizeMobile(
+        agreement.mobile ||
+        agreement.tenantMobile
+    ) === mobile
+);
+
+        agreements.sort((a, b) =>
+            String(b.startDate || "")
+                .localeCompare(
+                    String(a.startDate || "")
+                )
+        );
+
+        historyBody.innerHTML = "";
+
+        if (agreements.length === 0) {
+
+            historyBody.innerHTML =
+                '<tr><td colspan="6">No agreement history found.</td></tr>';
+
+            historyPanel.scrollIntoView({
+                behavior: "smooth"
+            });
+
+            return;
+        }
+
+        agreements.forEach(agreement => {
+
+            const businessDue =
+                Number(
+                    agreement.serviceCharge || 0
+                ) +
+                Number(
+                    agreement.brokerage || 0
+                );
+
+            const received =
+                Math.min(
+                    Number(
+                        agreement.amountReceived || 0
+                    ),
+                    businessDue
+                );
+
+            const pending =
+                Math.max(
+                    businessDue - received,
+                    0
+                );
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${escapeHtml(
+                    agreement.agreementNumber || "-"
+                )}</td>
+
+                <td>${escapeHtml(
+                    agreement.projectName || "-"
+                )}</td>
+
+                <td>${escapeHtml(
+                    agreement.startDate || "-"
+                )}</td>
+
+                <td>${escapeHtml(
+                    agreement.endDate || "-"
+                )}</td>
+
+                <td>${escapeHtml(
+    (
+        agreement.endDate &&
+        new Date(agreement.endDate) < new Date()
+    )
+        ? "Expired"
+        : "Active"
+)}</td>
+
+                <td>₹${pending.toLocaleString("en-IN")}</td>
+            `;
+
+            historyBody.appendChild(row);
+
+        });
+
+        historyPanel.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    } catch (error) {
+
+        console.error(
+            "CLIENT HISTORY ERROR:",
+            error
+        );
+
+        historyBody.innerHTML =
+            '<tr><td colspan="6">Unable to load agreement history.</td></tr>';
+    }
+
+});
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+searchInput.addEventListener(
+    "input",
+    renderClients
+);
+
+
+// ==========================================
+// SAFE HTML
+// ==========================================
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}

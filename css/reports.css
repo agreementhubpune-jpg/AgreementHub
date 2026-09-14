@@ -1,0 +1,355 @@
+/* ==========================================
+   AGREEMENT HUB - REPORTS
+========================================== */
+
+.report-filters {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 22px;
+
+    display: grid;
+    grid-template-columns: 180px 180px 1fr;
+    gap: 18px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.report-filters div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.report-filters label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.report-filters select,
+.report-filters input {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+    font-size: 14px;
+    outline: none;
+}
+
+.report-filters select:focus,
+.report-filters input:focus {
+    border-color: #17467e;
+}
+
+
+/* ==========================================
+   REPORT CARDS
+========================================== */
+
+.report-cards {
+    margin-bottom: 22px;
+}
+
+.report-cards .card h2 {
+    margin-bottom: 8px;
+}
+
+
+/* ==========================================
+   REPORT NOTE
+========================================== */
+
+.report-note {
+    background: #fff8db;
+    border: 1px solid #f3d77a;
+
+    padding: 14px 18px;
+    border-radius: 10px;
+
+    margin-bottom: 22px;
+
+    color: #66510b;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   REPORT TABLE
+========================================== */
+
+.report-table-card {
+    background: #ffffff;
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.report-table-card .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.report-table-card .section-header h2 {
+    margin: 0 0 4px 0;
+    color: #123f75;
+}
+
+#reportCount {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.report-table-card .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#reportTable {
+    width: 100%;
+    min-width: 1150px;
+
+    border-collapse: collapse;
+}
+
+#reportTable th {
+    background: #f5f8fc;
+
+    text-align: left;
+    padding: 13px 12px;
+
+    font-size: 13px;
+    color: #1e293b;
+
+    white-space: nowrap;
+}
+
+#reportTable td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #e8edf3;
+
+    font-size: 13px;
+    color: #334155;
+
+    white-space: nowrap;
+}
+
+#reportTable tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ==========================================
+   REPORT ACTION BUTTONS
+========================================== */
+
+.report-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-btn {
+    border: none;
+    background: #17467e;
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.report-btn:hover {
+    background: #123f75;
+}
+
+/* ==========================================
+   PAYMENT STATUS
+========================================== */
+
+.report-status {
+    display: inline-block;
+
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.report-status.paid {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.report-status.partial {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.report-status.pending {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.report-status.no-due {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+
+/* ==========================================
+   EMPTY TABLE
+========================================== */
+
+.empty-row {
+    text-align: center;
+    padding: 35px !important;
+    color: #64748b !important;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .report-filters {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .report-table-card {
+        padding: 15px;
+    }
+
+    .report-note {
+        font-size: 13px;
+    }
+
+}
+
+/* ==========================================
+   PRINT REPORT
+========================================== */
+
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    body {
+        background: #ffffff !important;
+    }
+
+    .sidebar,
+    .logout,
+    .report-filters,
+    .report-note,
+    .report-actions {
+        display: none !important;
+    }
+
+    .main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .topbar {
+        margin-bottom: 15px !important;
+    }
+
+    .topbar h1 {
+        font-size: 24px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .topbar p {
+        font-size: 13px !important;
+    }
+
+    .report-cards {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .report-cards .card {
+        box-shadow: none !important;
+        border: 1px solid #d7dee8 !important;
+        padding: 14px !important;
+        break-inside: avoid !important;
+    }
+
+    .report-cards .card h2 {
+        font-size: 20px !important;
+    }
+
+    .report-cards .card p {
+        font-size: 12px !important;
+    }
+
+    .report-table-card {
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .report-table-card .section-header {
+        margin-bottom: 10px !important;
+    }
+
+    .report-table-card .section-header h2 {
+        font-size: 20px !important;
+    }
+
+    .table-wrap {
+        overflow: visible !important;
+    }
+
+    #reportTable {
+        width: 100% !important;
+        min-width: 0 !important;
+        table-layout: auto !important;
+    }
+
+    #reportTable th,
+    #reportTable td {
+        font-size: 10px !important;
+        padding: 7px 6px !important;
+        white-space: normal !important;
+    }
+
+    #reportTable th {
+        background: #f1f5f9 !important;
+    }
+
+    #reportTable tr {
+        break-inside: avoid !important;
+    }
+
+}

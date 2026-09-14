@@ -1,95 +1,31 @@
 import { auth } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
-import {
-    signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+const form = document.getElementById("loginForm");
+const btn = document.getElementById("loginBtn");
+const msg = document.getElementById("msg");
 
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-document.addEventListener("DOMContentLoaded", () => {
+    if (!email || !password) {
+        msg.textContent = "Please enter email and password.";
+        return;
+    }
 
-    const loginBtn = document.getElementById("loginBtn");
-
-    loginBtn.addEventListener("click", async (e) => {
-
-        e.preventDefault();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const msg =
-            document.getElementById("msg");
-
-
-        if (!email || !password) {
-
-            msg.innerText =
-                "Please enter email and password.";
-
-            return;
-        }
-
-
-        try {
-
-            loginBtn.disabled = true;
-
-            loginBtn.innerText = "Logging in...";
-
-
-            // Firebase Authentication Login
-
-            const userCredential =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            console.log(
-                "Firebase Login Success:",
-                userCredential.user.uid
-            );
-
-
-            // Website Login Status
-
-            localStorage.setItem(
-                "loggedIn",
-                "true"
-            );
-
-
-            // Go to Dashboard
-
-            window.location.href =
-                "dashboard.html";
-
-
-        } catch (error) {
-
-            console.error(
-                "Firebase Login Error:",
-                error
-            );
-
-            console.error(
-                error.code
-            );
-
-            msg.innerText =
-                error.message;
-
-
-            loginBtn.disabled = false;
-
-            loginBtn.innerText = "Login";
-
-        }
-
-    });
-
+    try {
+        btn.disabled = true;
+        btn.textContent = "Logging in...";
+        msg.textContent = "";
+        await signInWithEmailAndPassword(auth, email, password);
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        console.error(error);
+        msg.textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = "Login";
+    }
 });

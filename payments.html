@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+Payments - Agreement Hub
+</title>
+
+<link
+    rel="stylesheet"
+    href="css/payments.css"
+>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h2>
+            Agreement Hub
+        </h2>
+
+        <p>
+            CRM Dashboard
+        </p>
+
+    </div>
+
+
+    <nav>
+
+        <a href="dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="client-form.html?mode=new">
+            ➕ New Agreement
+        </a>
+
+        <a href="clients.html">
+            👥 Clients
+        </a>
+
+        <a href="#">
+            🏠 Properties
+        </a>
+
+        <a
+            href="payments.html"
+            class="active"
+        >
+            💰 Payments
+        </a>
+
+        <a href="#">
+            📄 Reports
+        </a>
+
+        <a href="settings.html">
+            ⚙ Settings
+        </a>
+
+        <a href="index.html">
+            🌐 Website
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="main">
+
+
+    <!-- Header -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h1>
+                Payments
+            </h1>
+
+            <p>
+                Track Agreement Hub business payments
+            </p>
+
+        </div>
+
+
+        <a
+            href="dashboard.html"
+            class="back-btn"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================
+         SUMMARY CARDS
+    ====================================== -->
+
+    <section class="cards">
+
+
+        <div class="card">
+
+            <h2 id="totalBusinessAmount">
+                ₹0
+            </h2>
+
+            <p>
+                Total Business Charges
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 id="totalReceived">
+                ₹0
+            </h2>
+
+            <p>
+                Amount Received
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 id="totalPending">
+                ₹0
+            </h2>
+
+            <p>
+                Pending Amount
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 id="paidAgreements">
+                0
+            </h2>
+
+            <p>
+                Fully Paid
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         NOTE
+    ====================================== -->
+
+    <div class="info-note">
+
+        <strong>
+            Revenue Calculation:
+        </strong>
+
+        My Service Charge + Brokerage.
+
+        Monthly Rent and Security Deposit are
+        not Agreement Hub revenue.
+
+        Agreement Charges are shown for
+        internal reference only.
+
+    </div>
+
+
+
+    <!-- =====================================
+         SEARCH / FILTER
+    ====================================== -->
+
+    <section class="toolbar">
+
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Agreement No, Tenant, Mobile or Project"
+        >
+
+
+        <select id="paymentFilter">
+
+            <option value="all">
+                All Payments
+            </option>
+
+            <option value="paid">
+                Paid
+            </option>
+
+            <option value="partial">
+                Partially Paid
+            </option>
+
+            <option value="pending">
+                Pending
+            </option>
+
+        </select>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         PAYMENT TABLE
+    ====================================== -->
+
+    <section class="table-card">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Agreement Payments
+                </h2>
+
+                <p>
+                    Update received amount and payment date
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table id="paymentTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Agreement No
+                        </th>
+
+                        <th>
+                            Tenant
+                        </th>
+
+                        <th>
+                            Project
+                        </th>
+
+                        <th>
+                            Service Charge
+                        </th>
+
+                        <th>
+                            Agreement Charges
+                        </th>
+
+                        <th>
+                            Brokerage
+                        </th>
+
+                        <th>
+                            Business Due
+                        </th>
+
+                        <th>
+                            Received
+                        </th>
+
+                        <th>
+                            Pending
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Payment Date
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <!-- Firebase data -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     PAYMENT EDIT MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="paymentModal"
+>
+
+
+    <div class="modal-card">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    Update Payment
+                </h2>
+
+                <p id="modalAgreementNo">
+                    Agreement
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeModalBtn"
+                class="close-btn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div class="modal-body">
+
+
+            <div class="modal-summary">
+
+                <div>
+
+                    <span>
+                        Business Due
+                    </span>
+
+                    <strong id="modalBusinessDue">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Current Received
+                    </span>
+
+                    <strong id="modalCurrentReceived">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="amountReceived">
+                    Amount Received
+                </label>
+
+                <input
+                    type="number"
+                    id="amountReceived"
+                    min="0"
+                    step="1"
+                    placeholder="Enter Amount Received"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="paymentDate">
+                    Payment Date
+                </label>
+
+                <input
+                    type="date"
+                    id="paymentDate"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="paymentNote">
+                    Payment Note
+                </label>
+
+                <textarea
+                    id="paymentNote"
+                    placeholder="Optional payment note"
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    id="savePaymentBtn"
+                >
+                    Save Payment
+                </button>
+
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    id="cancelPaymentBtn"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+
+            <p id="paymentMessage"></p>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script
+    type="module"
+    src="js/payments.js"
+></script>
+
+
+</body>
+
+</html>

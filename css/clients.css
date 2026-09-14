@@ -1,176 +1,32 @@
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172b4d}.sidebar{position:fixed;width:240px;height:100vh;background:#123b73;color:#fff;padding:26px 18px}.logo{text-align:center}.logo p{color:#dce6f5}.sidebar nav a{display:block;color:#fff;text-decoration:none;padding:13px;margin:5px 0;border-radius:8px}.sidebar nav a.active,.sidebar nav a:hover{background:#ffbd00;color:#111}.main{margin-left:240px;padding:30px}.topbar{display:flex;justify-content:space-between;align-items:center}.topbar a{color:#123b73;text-decoration:none;font-weight:700}.client-grid{display:grid;grid-template-columns:360px 1fr;gap:20px}.panel{background:#fff;border-radius:14px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.06)}label{display:block;font-weight:700;margin-top:12px;margin-bottom:6px}input,textarea,select{width:100%;padding:11px;border:1px solid #d0d5dd;border-radius:8px}textarea{min-height:90px}.panel button{width:100%;padding:12px;margin-top:16px;border:0;border-radius:8px;background:#123b73;color:#fff}.list-head{display:flex;gap:12px;justify-content:space-between;align-items:center}.list-head input{max-width:300px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #eee;text-align:left}
+@media(max-width:850px){.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0;padding:18px}.client-grid{grid-template-columns:1fr}.list-head{flex-direction:column;align-items:stretch}}
+#historyPanel{margin-left:240px;margin-right:30px;margin-top:20px}
+@media(max-width:850px){#historyPanel{margin-left:0;margin-right:0}}
+#profilePanel{
+    margin-left:240px;
+    margin-right:30px;
+    margin-top:20px;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f6f8;
+#profileDetails{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(220px,1fr));
+    gap:12px 24px;
 }
 
-.sidebar {
-    position: fixed;
-    width: 230px;
-    height: 100vh;
-    background: #172033;
-    color: white;
-    padding: 20px;
+#profileDetails p{
+    margin:0;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
 }
 
-.logo h2 {
-    margin-bottom: 5px;
-}
-
-.logo p {
-    margin-top: 0;
-    color: #cbd5e1;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 20px 0;
-}
-
-.sidebar li {
-    margin-bottom: 8px;
-}
-
-.sidebar a {
-    display: block;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-.sidebar a:hover,
-.sidebar a.active {
-    background: #2d3b55;
-}
-
-.main {
-    margin-left: 230px;
-    padding: 25px;
-}
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.topbar h1 {
-    margin-bottom: 5px;
-}
-
-.topbar p {
-    margin-top: 0;
-    color: #666;
-}
-
-.topbar button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.client-container {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 25px;
-}
-
-.form-card,
-.list-card {
-    background: white;
-    padding: 22px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.form-card h2,
-.list-card h2 {
-    margin-top: 0;
-}
-
-form label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-form input,
-form textarea,
-form select,
-#clientSearch {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-}
-
-form textarea {
-    height: 90px;
-    resize: vertical;
-}
-
-.save-btn {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    background: #172033;
-    color: white;
-    cursor: pointer;
-}
-
-.save-btn:hover {
-    background: #2d3b55;
-}
-
-#clientMsg {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-#clientSearch {
-    margin-bottom: 15px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 12px;
-    border-bottom: 1px solid #e5e7eb;
-    text-align: left;
-}
-
-th {
-    background: #f1f3f5;
-}
-
-@media (max-width: 900px) {
-
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
+@media(max-width:850px){
+    #profilePanel{
+        margin-left:0;
+        margin-right:0;
     }
 
-    .main {
-        margin-left: 0;
+    #profileDetails{
+        grid-template-columns:1fr;
     }
-
-    .client-container {
-        grid-template-columns: 1fr;
-    }
-
 }

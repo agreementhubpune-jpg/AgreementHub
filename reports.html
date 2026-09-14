@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports | Agreement Hub CRM</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/reports.css?v=3">
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Agreement Hub</h2>
+            <p>CRM Dashboard</p>
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+
+            <a href="client-form.html?mode=new">
+                ➕ New Agreement
+            </a>
+
+            <a href="clients.html">
+                👥 Clients
+            </a>
+
+            <a href="#">
+                🏠 Properties
+            </a>
+
+            <a href="payments.html">
+                💰 Payments
+            </a>
+
+            <a class="active" href="reports.html">
+                📄 Reports
+            </a>
+
+            <a href="settings.html">
+                ⚙ Settings
+            </a>
+
+            <a href="index.html">
+                🌐 Website
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h1>Reports</h1>
+                <p>Agreement Hub Business & Payment Reports</p>
+            </div>
+
+            <button
+                class="logout"
+                id="logoutBtn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             FILTERS
+        ========================== -->
+
+        <section class="report-filters">
+
+            <div>
+
+                <label for="monthFilter">
+                    Month
+                </label>
+
+                <select id="monthFilter">
+
+                    <option value="all">
+                        All Months
+                    </option>
+
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label for="yearFilter">
+                    Year
+                </label>
+
+                <select id="yearFilter">
+                    <option value="all">
+                        All Years
+                    </option>
+                </select>
+
+            </div>
+
+
+            <div class="report-search">
+
+                <label for="reportSearch">
+                    Search
+                </label>
+
+                <input
+                    type="text"
+                    id="reportSearch"
+                    placeholder="Agreement No, Tenant or Project"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FINANCIAL SUMMARY
+        ========================== -->
+
+        <section class="cards report-cards">
+
+            <div class="card">
+
+                <h2 id="reportBusinessCharges">
+                    ₹0
+                </h2>
+
+                <p>
+                    Total Business Charges
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2 id="reportReceived">
+                    ₹0
+                </h2>
+
+                <p>
+                    Amount Received
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2 id="reportPending">
+                    ₹0
+                </h2>
+
+                <p>
+                    Pending Amount
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2 id="reportFullyPaid">
+                    0
+                </h2>
+
+                <p>
+                    Fully Paid
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INFORMATION
+        ========================== -->
+
+        <div class="report-note">
+
+            Revenue Calculation:
+            <strong>
+                My Service Charge + Brokerage
+            </strong>
+
+            Monthly Rent and Security Deposit are
+            not Agreement Hub revenue.
+
+        </div>
+
+
+        <!-- =========================
+             AGREEMENT REPORT TABLE
+        ========================== -->
+
+        <section class="report-table-card">
+
+            <div class="section-header">
+
+    <div>
+        <h2>Agreement Report</h2>
+        <p id="reportCount">0 Agreements</p>
+    </div>
+
+    <div class="report-actions">
+
+        <button
+            type="button"
+            id="exportCsvBtn"
+            class="report-btn"
+        >
+            Export CSV
+        </button>
+
+        <button
+            type="button"
+            id="printReportBtn"
+            class="report-btn"
+        >
+            Print Report
+        </button>
+
+    </div>
+
+</div>
+
+
+            <div class="table-wrap">
+
+                <table id="reportTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Agreement No
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Tenant
+                            </th>
+
+                            <th>
+                                Project
+                            </th>
+
+                            <th>
+                                Service Charge
+                            </th>
+
+                            <th>
+                                Brokerage
+                            </th>
+
+                            <th>
+                                Business Charges
+                            </th>
+
+                            <th>
+                                Received
+                            </th>
+
+                            <th>
+                                Pending
+                            </th>
+
+                            <th>
+                                Payment Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td
+                                colspan="10"
+                                class="empty-row"
+                            >
+                                Loading Reports...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/reports.js"
+    ></script>
+
+</body>
+
+</html>

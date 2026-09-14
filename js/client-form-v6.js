@@ -25,94 +25,65 @@ import {
 let savedProperties = [];
 
 async function loadSavedProperties() {
+    const savedPropertySelect = document.getElementById("savedProperty");
 
-    const savedPropertySelect =
-        document.getElementById("savedProperty");
-
-    if (!savedPropertySelect) {
-        return;
-    }
+    if (!savedPropertySelect) return;
 
     try {
+        const snapshot = await getDocs(collection(db, "properties"));
 
-        const snapshot =
-            await getDocs(
-                collection(db, "properties")
-            );
-
-        savedProperties =
-            snapshot.docs.map((propertyDoc) => ({
-                id: propertyDoc.id,
-                ...propertyDoc.data()
-            }));
+        savedProperties = snapshot.docs.map((propertyDoc) => ({
+            id: propertyDoc.id,
+            ...propertyDoc.data()
+        }));
 
         savedPropertySelect.innerHTML =
             '<option value="">Select Property</option>';
 
         savedProperties
             .sort((a, b) =>
-                String(a.propertyId || "")
-                    .localeCompare(
-                        String(b.propertyId || "")
-                    )
+                String(a.propertyId || "").localeCompare(
+                    String(b.propertyId || "")
+                )
             )
             .forEach((property) => {
-
-                const option =
-                    document.createElement("option");
+                const option = document.createElement("option");
 
                 option.value = property.id;
 
-                option.textContent =
-                    [
-                        property.propertyId,
-                        property.projectName,
-                        property.flatNumber,
-                        property.ownerName
-                    ]
-                        .filter(Boolean)
-                        .join(" - ");
+                option.textContent = [
+                    property.propertyId,
+                    property.projectName,
+                    property.flatNumber,
+                    property.ownerName
+                ]
+                    .filter(Boolean)
+                    .join(" - ");
 
                 savedPropertySelect.appendChild(option);
-
             });
 
     } catch (error) {
-
-        console.error(
-            "Saved Properties Load Error:",
-            error
-        );
-
+        console.error("Saved Properties Load Error:", error);
     }
-
 }
-
 
 document
     .getElementById("savedProperty")
     ?.addEventListener("change", (event) => {
 
-        const property =
-            savedProperties.find(
-                (item) =>
-                    item.id === event.target.value
-            );
+        const property = savedProperties.find(
+            (item) => item.id === event.target.value
+        );
 
-        if (!property) {
-            return;
-        }
+        if (!property) return;
 
-
-        // Owner Details
         document.getElementById("ownerName").value =
             property.ownerName || "";
 
         document.getElementById("ownerMobile").value =
             property.ownerMobile || "";
 
-
-        // Property Details
         document.getElementById("projectName").value =
             property.projectName || "";
 
@@ -122,16 +93,12 @@ document
         document.getElementById("area").value =
             property.area || "";
 
-
-        // Rent & Deposit
         document.getElementById("rent").value =
             property.monthlyRent || "";
 
         document.getElementById("deposit").value =
             property.securityDeposit || "";
-
     });
-
 
 loadSavedProperties();
 
@@ -786,138 +753,6 @@ async function syncTenantToClients(
 }
 
 
-    try {
-
-        /*
-            Mobile number is used as Client Document ID.
-
-            Same Tenant Mobile =
-            Same Client Document.
-
-            Therefore duplicate clients
-            are automatically avoided.
-        */
-
-        const clientRef =
-            doc(
-                db,
-                "clients",
-                mobile
-            );
-
-
-        const existingClient =
-            await getDoc(
-                clientRef
-            );
-
-
-        const clientData = {
-
-            clientName:
-                agreement.tenant ||
-                "",
-
-            mobile:
-                mobile,
-
-            email:
-                agreement.tenantEmail ||
-                "",
-
-            tenantAddress:
-                agreement.tenantAddress ||
-                "",
-
-            projectName:
-                agreement.projectName ||
-                "",
-
-            propertyAddress:
-                agreement.propertyAddress ||
-                "",
-
-            flatNumber:
-                agreement.flatNumber ||
-                "",
-
-            buildingName:
-                agreement.buildingName ||
-                "",
-
-            lastAgreementNo:
-                agreement.agreementNumber ||
-                "",
-
-            lastAgreementId:
-                agreementId ||
-                "",
-
-            agreementStartDate:
-                agreement.startDate ||
-                "",
-
-            agreementEndDate:
-                agreement.endDate ||
-                "",
-
-            status:
-                "Active",
-
-            updatedAt:
-                new Date()
-                    .toISOString()
-
-        };
-
-
-        // Created At only first time
-
-        if (
-            !existingClient.exists()
-        ) {
-
-            clientData.createdAt =
-                new Date()
-                    .toISOString();
-
-        }
-
-
-        await setDoc(
-
-            clientRef,
-
-            clientData,
-
-            {
-                merge: true
-            }
-
-        );
-
-
-        console.log(
-            "CLIENT AUTO SYNC SUCCESS:",
-            mobile
-        );
-
-
-    } catch (error) {
-
-        /*
-            Agreement should not fail
-            just because Client Sync failed.
-        */
-
-        console.error(
-            "CLIENT AUTO SYNC ERROR:",
-            error
-        );
-
-    }
-
-}
 
 
 // ==========================================

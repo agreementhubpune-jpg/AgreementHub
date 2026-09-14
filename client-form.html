@@ -1,322 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/client-form.css">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Client Agreement Form | Agreement Hub</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="css/client-form.css?v=2">
 </head>
 <body>
-
-<header>
-
-<div class="logo">
-Agreement Hub
-</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-<a href="client-form.html">Agreement Form</a>
-
-</nav>
-
+<header class="form-header">
+    <div class="brand">Agreement Hub</div>
+    <nav><a href="dashboard.html">Dashboard</a><a href="settings.html">Settings</a></nav>
 </header>
 
-<section class="form-section">
-
-<h2>Client Agreement Form</h2>
-
-<form id="agreementForm">
-
-<h3>Owner Details</h3>
-
-<label>Owner Name</label>
-<input type="text" id="ownerName" placeholder="Enter Owner Name" required>
-
-<label>Owner Mobile Number</label>
-<input type="tel" id="ownerMobile" placeholder="Enter Owner Mobile Number" required>
-
-<label>Owner Email</label>
-<input type="email" id="ownerEmail" placeholder="Enter Owner Email">
-
-<label>Owner Aadhaar Number</label>
-<input type="text" id="ownerAadhaar" placeholder="Enter Owner Aadhaar Number" maxlength="12">
-
-<label>Owner PAN Number</label>
-<input type="text" id="ownerPan" placeholder="Enter Owner PAN Number" maxlength="10">
-
-<label>Owner Age</label>
-<input
-    type="number"
-    id="ownerAge"
-    placeholder="Enter Owner Age"
->
-
-<label>Owner Occupation</label>
-<input
-    type="text"
-    id="ownerOccupation"
-    placeholder="Enter Owner Occupation"
->
-
-<label>Owner Address</label>
-<textarea
-    id="ownerAddress"
-    placeholder="Enter Owner Address"
-    rows="3"
-></textarea>
-
-<hr>
-
-<h3>Tenant Details</h3>
-
-<label>Tenant Name</label>
-<input type="text" id="tenantName" placeholder="Enter Tenant Name" required>
-
-<label>Tenant Mobile Number</label>
-<input type="tel" id="mobileNumber" placeholder="Enter Tenant Mobile Number" required>
-
-<label>Tenant Email</label>
-<input type="email" id="tenantEmail" placeholder="Enter Tenant Email">
-
-<label>Tenant Aadhaar Number</label>
-<input type="text" id="tenantAadhaar" placeholder="Enter Tenant Aadhaar Number" maxlength="12">
-
-<label>Tenant PAN Number</label>
-<input type="text" id="tenantPan" placeholder="Enter Tenant PAN Number" maxlength="10">
-
-<label>Tenant Age</label>
-<input
-    type="number"
-    id="tenantAge"
-    placeholder="Enter Tenant Age"
->
-
-<label>Tenant Occupation</label>
-<input
-    type="text"
-    id="tenantOccupation"
-    placeholder="Enter Tenant Occupation"
->
-
-<label>Tenant Address</label>
-<textarea
-    id="tenantAddress"
-    placeholder="Enter Tenant Address"
-    rows="3"
-></textarea>
-
-<hr>
-
-<h3>Property Details</h3>
-
-<label>Project Name</label>
-<input type="text" id="projectName" placeholder="Enter Project Name">
-
-<label>Flat Number</label>
-<input type="text" id="flatNumber" placeholder="Enter Flat Number">
-
-<label>Building Name</label>
-<input type="text" id="buildingName" placeholder="Enter Building Name">
-
-<label>Floor</label>
-<input type="text" id="floor" placeholder="Enter Floor">
-
-<label>Built-up Area (Sq.ft.)</label>
-<input type="number" id="area" placeholder="Enter Built-up Area">
-
-<label>Survey Number</label>
-<input type="text" id="surveyNumber" placeholder="Enter Survey Number">
-
-<label>CTS Number</label>
-<input type="text" id="ctsNumber" placeholder="Enter CTS Number">
-
-<label>Village</label>
-<input type="text" id="village" placeholder="Enter Village">
-
-<label>Taluka</label>
-<input type="text" id="taluka" placeholder="Enter Taluka">
-
-<label>District</label>
-<input type="text" id="district" placeholder="Enter District">
-
-<label>PIN Code</label>
-<input type="text" id="pinCode" placeholder="Enter PIN Code">
-
-<label>Property Address</label>
-<textarea id="propertyAddress" placeholder="Enter Full Property Address"></textarea>
-
-<hr>
-
-<h3>Agreement Details</h3>
-
-<label>Agreement Number</label>
-<input type="text" id="agreementNumber" readonly>
-
-<label>Agreement Start Date</label>
-<input type="date" id="startDate">
-
-
-
-<label>Agreement Duration</label>
-
-<select id="duration">
-<option value="11">11 Months</option>
-<option value="22">22 Months</option>
-<option value="33">33 Months</option>
-</select>
-
-<label>Agreement End Date</label>
-<input type="date" id="endDate" readonly>
-<label>Monthly Rent</label>
-<input type="number" id="rent" placeholder="Enter Monthly Rent">
-
-<label>Security Deposit</label>
-<input type="number" id="deposit" placeholder="Enter Security Deposit">
-
-<label>Maintenance Charges</label>
-<input type="number" id="maintenance" placeholder="Enter Maintenance Charges">
-
-<label>Lock-in Period (Months)</label>
-<input type="number" id="lockIn" placeholder="Enter Lock-in Period">
-
-<label>Notice Period (Days)</label>
-<input type="number" id="noticePeriod" placeholder="Enter Notice Period">
-<br><br>
-
-<!-- Agreement Clauses -->
-
-<div class="form-section">
-
-    <h2>Agreement Clauses</h2>
-
-    <label>
-        <input type="checkbox" name="clause" value="period" checked>
-        Period
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="licenseFee" checked>
-        License Fee and Deposit
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="depositPayment" checked>
-        Payment of Deposit
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="maintenance" checked>
-        Maintenance Charges
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="electricity" checked>
-        Electricity Charges
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="use" checked>
-        Use of Premises
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="alteration" checked>
-        Alteration
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="noTenancy" checked>
-        No Tenancy / No Subletting
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="inspection" checked>
-        Inspection
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="cancellation" checked>
-        Cancellation / Notice
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="possession" checked>
-        Possession
-    </label>
-
-    <label>
-        <input type="checkbox" name="clause" value="registration" checked>
-        Registration
-    </label>
-
-</div>
-
-<h3>Witness Details</h3>
-
-<label>Witness 1 Name</label>
-<input type="text" id="witness1Name" placeholder="Enter Witness 1 Name">
-
-<label>Witness 1 Mobile</label>
-<input type="tel" id="witness1Mobile" placeholder="Enter Witness 1 Mobile">
-
-<label>Witness 2 Name</label>
-<input type="text" id="witness2Name" placeholder="Enter Witness 2 Name">
-
-<label>Witness 2 Mobile</label>
-<input type="tel" id="witness2Mobile" placeholder="Enter Witness 2 Mobile">
-
-<hr>
-
-<h3>Registration Details</h3>
-
-<label>Stamp Duty</label>
-<input type="number" id="stampDuty" placeholder="Enter Stamp Duty">
-
-<label>Registration Fee</label>
-<input type="number" id="registrationFee" placeholder="Enter Registration Fee">
-
-<label>Agreement Charges</label>
-<input type="number" id="agreementCharges" placeholder="Enter Agreement Charges">
-
-<label>My Service Charge</label>
-<input
-    type="number"
-    id="serviceCharge"
-    placeholder="Enter My Service Charge"
-    min="0"
->
-
-<label>Brokerage</label>
-<input type="number" id="brokerage" placeholder="Enter Brokerage">
-
-<input type="hidden" id="editIndex">
-
-<button type="submit" class="btn">
-Save Agreement
-</button>
-
-<button type="button" class="btn" onclick="generatePDF()">
-Generate Agreement PDF
-</button>
-
-<button type="reset" class="btn">
-Reset
-</button>
-
-</form>
-
+<main class="form-shell">
+    <div class="form-title">
+        <div><h1>Client Agreement Form</h1><p>New and Edit Agreement</p></div>
+        <a href="dashboard.html" class="back-link">← Dashboard</a>
+    </div>
+
+    <form id="agreementForm">
+        <section class="section-card">
+            <h2>Agreement Details</h2>
+            <div class="grid">
+                <div class="field"><label>Agreement Number</label><input type="text" id="agreementNumber" readonly></div>
+                <div class="field"><label>Agreement Start Date</label><input type="date" id="startDate" required></div>
+                <div class="field"><label>Agreement Duration</label>
+                    <select id="duration">
+                        <option value="11">11 Months</option>
+                        <option value="22">22 Months</option>
+                        <option value="33">33 Months</option>
+                    </select>
+                </div>
+                <div class="field"><label>Agreement End Date</label><input type="date" id="endDate" readonly></div>
+            </div>
+        </section>
+
+        <section class="section-card">
+    <h2>Select Saved Property</h2>
+
+    <div class="grid">
+        <div class="field">
+            <label>Saved Property</label>
+
+            <select id="savedProperty">
+                <option value="">Select Property</option>
+            </select>
+        </div>
+    </div>
+
+    <p class="note">
+        Select a saved property to automatically fill Owner, Property, Rent and Deposit details.
+    </p>
 </section>
+<section class="section-card">
+            <h2>Owner Details</h2>
+            <div class="grid">
+                <div class="field"><label>Owner Name</label><input type="text" id="ownerName" required></div>
+                <div class="field"><label>Owner Mobile Number</label><input type="tel" id="ownerMobile" required></div>
+                <div class="field"><label>Owner Email</label><input type="email" id="ownerEmail"></div>
+                <div class="field"><label>Owner Aadhaar Number</label><input type="text" id="ownerAadhaar" maxlength="12"></div>
+                <div class="field"><label>Owner PAN Number</label><input type="text" id="ownerPan" maxlength="10"></div>
+                <div class="field"><label>Owner Age</label><input type="number" id="ownerAge"></div>
+                <div class="field"><label>Owner Occupation</label><input type="text" id="ownerOccupation"></div>
+                <div class="field full"><label>Owner Address</label><textarea id="ownerAddress" rows="3"></textarea></div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Tenant Details</h2>
+            <div class="grid">
+                <div class="field"><label>Tenant Name</label><input type="text" id="tenantName" required></div>
+                <div class="field"><label>Tenant Mobile Number</label><input type="tel" id="mobileNumber" required></div>
+                <div class="field"><label>Tenant Email</label><input type="email" id="tenantEmail"></div>
+                <div class="field"><label>Tenant Aadhaar Number</label><input type="text" id="tenantAadhaar" maxlength="12"></div>
+                <div class="field"><label>Tenant PAN Number</label><input type="text" id="tenantPan" maxlength="10"></div>
+                <div class="field"><label>Tenant Age</label><input type="number" id="tenantAge"></div>
+                <div class="field"><label>Tenant Occupation</label><input type="text" id="tenantOccupation"></div>
+                <div class="field full"><label>Tenant Address</label><textarea id="tenantAddress" rows="3"></textarea></div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Property Details</h2>
+            <div class="grid">
+                <div class="field"><label>Project Name</label><input type="text" id="projectName"></div>
+                <div class="field"><label>Flat Number</label><input type="text" id="flatNumber"></div>
+                <div class="field"><label>Building Name</label><input type="text" id="buildingName"></div>
+                <div class="field"><label>Wing</label><input type="text" id="wing"></div>
+                <div class="field"><label>Floor</label><input type="text" id="floor"></div>
+                <div class="field"><label>Built-up Area (Sq.ft.)</label><input type="number" id="area"></div>
+                <div class="field"><label>Survey Number</label><input type="text" id="surveyNumber"></div>
+                <div class="field"><label>CTS Number</label><input type="text" id="ctsNumber"></div>
+                <div class="field"><label>Village</label><input type="text" id="village"></div>
+                <div class="field"><label>Taluka</label><input type="text" id="taluka"></div>
+                <div class="field"><label>District</label><input type="text" id="district"></div>
+                <div class="field"><label>PIN Code</label><input type="text" id="pinCode"></div>
+                <div class="field full"><label>Property Address</label><textarea id="propertyAddress"></textarea></div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Rent & Deposit Details</h2>
+            <div class="grid">
+                <div class="field"><label>Monthly Rent</label><input type="number" id="rent" min="0"></div>
+                <div class="field"><label>Security Deposit</label><input type="number" id="deposit" min="0"></div>
+                <div class="field"><label>Maintenance Charges</label><input type="number" id="maintenance" min="0"></div>
+                <div class="field"><label>Lock-in Period (Months)</label><input type="number" id="lockIn" min="0"></div>
+                <div class="field"><label>Notice Period (Days)</label><input type="number" id="noticePeriod" min="0"></div>
+            </div>
+            <p class="note">Rent and Security Deposit are agreement details only. They are not counted as Agreement Hub revenue.</p>
+        </section>
+
+        <section class="section-card">
+            <h2>Agreement Clauses</h2>
+            <div class="clause-grid">
+                <label><input type="checkbox" name="clause" value="period" checked> Period</label>
+                <label><input type="checkbox" name="clause" value="licenseFee" checked> License Fee and Deposit</label>
+                <label><input type="checkbox" name="clause" value="depositPayment" checked> Payment of Deposit</label>
+                <label><input type="checkbox" name="clause" value="maintenance" checked> Maintenance Charges</label>
+                <label><input type="checkbox" name="clause" value="electricity" checked> Electricity Charges</label>
+                <label><input type="checkbox" name="clause" value="use" checked> Use of Premises</label>
+                <label><input type="checkbox" name="clause" value="alteration" checked> Alteration</label>
+                <label><input type="checkbox" name="clause" value="noTenancy" checked> No Tenancy / No Subletting</label>
+                <label><input type="checkbox" name="clause" value="inspection" checked> Inspection</label>
+                <label><input type="checkbox" name="clause" value="cancellation" checked> Cancellation / Notice</label>
+                <label><input type="checkbox" name="clause" value="possession" checked> Possession</label>
+                <label><input type="checkbox" name="clause" value="registration" checked> Registration</label>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Witness Details</h2>
+            <div class="grid">
+                <div class="field"><label>Witness 1 Name</label><input type="text" id="witness1Name"></div>
+                <div class="field"><label>Witness 1 Mobile</label><input type="tel" id="witness1Mobile"></div>
+                <div class="field"><label>Witness 2 Name</label><input type="text" id="witness2Name"></div>
+                <div class="field"><label>Witness 2 Mobile</label><input type="tel" id="witness2Mobile"></div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Registration Details</h2>
+            <div class="grid">
+                <div class="field"><label>Stamp Duty</label><input type="number" id="stampDuty" min="0"></div>
+                <div class="field"><label>Registration Fee</label><input type="number" id="registrationFee" min="0"></div>
+            </div>
+            <p class="note">Government fee auto-calculation is intentionally not hard-coded until the official calculation rule is verified.</p>
+        </section>
+
+        <section class="section-card internal-card">
+            <h2>Admin Only - Internal Charges</h2>
+            <div class="grid">
+                <div class="field"><label>Agreement Charges (Internal)</label><input type="number" id="agreementCharges" min="0"></div>
+                <div class="field"><label>My Service Charge (Revenue)</label><input type="number" id="serviceCharge" min="0"></div>
+                <div class="field"><label>Brokerage (Internal)</label><input type="number" id="brokerage" min="0"></div>
+            </div>
+            <p class="note">These three fields are for Admin/CRM only and are not shown in Client Preview or PDF.</p>
+        </section>
+
+        <div class="actions">
+            <button type="submit" class="primary">Save Agreement</button>
+            <button type="button" id="pdfBtn">Generate Client PDF</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+</main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script type="module" src="js/client-form.js"></script>
-<script src="js/agreement-pdf.js"></script>
-    
+<script type="module" src="js/client-form-v6.js?v=2"></script>
 </body>
 </html>

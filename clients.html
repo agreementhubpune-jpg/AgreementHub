@@ -1,143 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Agreement Hub - Clients</title>
-
-    <link rel="stylesheet" href="css/clients.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agreement Hub - Clients</title>
+<link rel="stylesheet" href="css/clients.css">
 </head>
-
 <body>
-
-<div class="sidebar">
-
-    <div class="logo">
-        <h2>Agreement Hub</h2>
-        <p>CRM Dashboard</p>
-    </div>
-
-    <ul>
-        <li><a href="dashboard.html">🏠 Dashboard</a></li>
-        <li><a href="client-form.html">➕ New Agreement</a></li>
-        <li><a href="clients.html" class="active">👥 Clients</a></li>
-        <li><a href="#">🏠 Properties</a></li>
-        <li><a href="#">💰 Payments</a></li>
-        <li><a href="#">📄 Reports</a></li>
-        <li><a href="#">⚙ Settings</a></li>
-    </ul>
-
-</div>
-
-<div class="main">
-
-    <div class="topbar">
-
-        <div>
-            <h1>Clients</h1>
-            <p>Manage Agreement Hub Clients</p>
-        </div>
-
-        <button onclick="window.location.href='dashboard.html'">
-            ← Dashboard
-        </button>
-
-    </div>
-
-    <div class="client-container">
-
-        <div class="form-card">
-
-            <h2>➕ Add Client</h2>
-
+<aside class="sidebar">
+    <div class="logo"><h2>Agreement Hub</h2><p>CRM Dashboard</p></div>
+    <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="client-form.html">➕ New Agreement</a>
+        <a class="active" href="clients.html">👥 Clients</a>
+        <a href="settings.html">⚙ Settings</a>
+    </nav>
+</aside>
+<main class="main">
+    <div class="topbar"><div><h1>Clients</h1><p>Manage Agreement Hub Clients</p></div><a href="dashboard.html">← Dashboard</a></div>
+    <div class="client-grid">
+        <section class="panel">
+            <h2>Add Client</h2>
             <form id="clientForm">
-
-                <label>Client Name</label>
-                <input
-                    type="text"
-                    id="clientName"
-                    placeholder="Enter Client Name"
-                    required
-                >
-
-                <label>Email</label>
-                <input
-                    type="email"
-                    id="clientEmail"
-                    placeholder="Enter Email"
-                    required
-                >
-
-                <label>Mobile Number</label>
-                <input
-                    type="tel"
-                    id="clientMobile"
-                    placeholder="Enter Mobile Number"
-                    required
-                >
-
-                <label>Property Address</label>
-                <textarea
-                    id="propertyAddress"
-                    placeholder="Enter Property Address"
-                    required
-                ></textarea>
-
+                <label>Client Name</label><input id="clientName" required>
+                <label>Email</label><input id="clientEmail" type="email" required>
+                <label>Mobile Number</label><input id="clientMobile" type="tel" required>
+                <label>Property Address</label><textarea id="propertyAddress" required></textarea>
                 <label>Status</label>
-
-                <select id="clientStatus">
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
-
-                <button type="submit" class="save-btn">
-                    Save Client
-                </button>
-
+                <select id="clientStatus"><option>Active</option><option>Inactive</option></select>
+                <button type="submit">Save Client</button>
             </form>
-
             <p id="clientMsg"></p>
-
-        </div>
-
-        <div class="list-card">
-
-            <h2>👥 Client List</h2>
-
-            <input
-                type="text"
-                id="clientSearch"
-                placeholder="🔍 Search Client"
-            >
-
-            <table id="clientTable">
-
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Property</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                </tbody>
-
-            </table>
-
-        </div>
-
+        </section>
+        <section class="panel">
+            <div class="list-head"><h2>Client List</h2><input id="clientSearch" placeholder="Search Client"></div>
+            <div class="table-wrap"><table id="clientTable"><thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Property</th><th>Status</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+        </section>
     </div>
+</main>
 
+<div id="profilePanel" class="panel" style="display:none;">
+    <h2 id="profileTitle">Client Profile</h2>
+
+    <div id="profileDetails">
+        <p><strong>Name:</strong> <span id="profileName">-</span></p>
+        <p><strong>Mobile:</strong> <span id="profileMobile">-</span></p>
+        <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+        <p><strong>Property:</strong> <span id="profileProperty">-</span></p>
+        <p><strong>Status:</strong> <span id="profileStatus">-</span></p>
+        <p><strong>Total Agreements:</strong> <span id="profileTotalAgreements">0</span></p>
+        <p><strong>Active Agreements:</strong> <span id="profileActiveAgreements">0</span></p>
+        <p><strong>Expired Agreements:</strong> <span id="profileExpiredAgreements">0</span></p>
+        <p><strong>Latest End Date:</strong> <span id="profileEndDate">-</span></p>
+        <p><strong>Total Pending:</strong> ₹<span id="profilePending">0</span></p>
+    </div>
 </div>
 
-<script
-    type="module"
-    src="js/clients.js"
-></script>
+<div id="historyPanel" class="panel" style="display:none;">
+    <h2 id="historyTitle">Client Agreement History</h2>
 
+    <div class="table-wrap">
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Agreement No</th>
+                    <th>Project</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Pending</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="module" src="js/clients.js"></script>
 </body>
 </html>
+
+
+

@@ -1,459 +1,919 @@
-/* ===========================
-   Agreement Hub Dashboard V2
-=========================== */
+/* =========================================
+   AGREEMENT HUB - DASHBOARD
+   ========================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, Arial, sans-serif;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    background:#f4f7fc;
-    display:flex;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172b4d;
 }
 
-/* Sidebar */
 
-.sidebar{
+/* =========================================
+   SIDEBAR
+   ========================================= */
 
-    width:260px;
-    min-height:100vh;
-    background:#0d2b5c;
-    color:#fff;
-    position:fixed;
-    left:0;
-    top:0;
-    padding:25px;
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
 
+    width: 250px;
+    height: 100vh;
+
+    background: #123b73;
+    color: white;
+
+    padding: 28px 20px;
+
+    overflow-y: auto;
 }
 
-.logo{
-
-    text-align:center;
-    margin-bottom:40px;
-
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.logo h2{
-
-    font-size:28px;
-    margin-bottom:5px;
-
+.logo h2 {
+    margin: 0;
+    font-size: 27px;
 }
 
-.logo p{
-
-    color:#ddd;
-    font-size:14px;
-
+.logo p {
+    margin: 8px 0;
+    color: #dce6f5;
 }
 
-.sidebar ul{
 
-    list-style:none;
+/* Sidebar Menu */
 
+.sidebar nav a {
+
+    display: block;
+
+    color: white;
+    text-decoration: none;
+
+    padding: 13px 14px;
+    margin: 6px 0;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+
+    transition: 0.2s;
 }
 
-.sidebar li{
+.sidebar nav a:hover,
+.sidebar nav a.active {
 
-    margin-bottom:10px;
-
+    background: #ffbd00;
+    color: #111;
 }
 
-.sidebar a{
 
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:14px 18px;
-    border-radius:10px;
-    transition:.3s;
+/* =========================================
+   MAIN
+   ========================================= */
 
+.main {
+
+    margin-left: 250px;
+
+    padding: 30px;
+
+    width: calc(100% - 250px);
 }
 
-.sidebar a:hover,
-.sidebar a.active{
 
-    background:#f4b400;
-    color:#000;
+/* =========================================
+   TOP BAR
+   ========================================= */
 
+.topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 28px;
 }
 
-/* Main */
+.topbar h1 {
 
-.main{
+    margin: 0;
 
-    margin-left:260px;
-    width:calc(100% - 260px);
-    padding:30px;
+    font-size: 34px;
 
+    color: #123b73;
 }
 
-/* Topbar */
+.topbar p {
 
-.topbar{
+    margin-top: 8px;
 
-    background:white;
-    padding:20px 30px;
-    border-radius:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    margin-bottom:30px;
-
+    color: #667085;
 }
 
-.topbar h1{
+.logout {
 
-    color:#0d2b5c;
-    font-size:30px;
+    background: #df4d4d;
+    color: white;
 
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 12px 20px;
+
+    cursor: pointer;
+
+    font-size: 15px;
 }
 
-.topbar p{
 
-    color:#777;
-    margin-top:5px;
+/* =========================================
+   DASHBOARD CARDS
+   ========================================= */
 
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 24px;
 }
 
-.admin{
+.card {
 
-    background:#0d2b5c;
-    color:white;
-    padding:12px 20px;
-    border-radius:30px;
-    font-weight:bold;
+    background: white;
 
+    padding: 24px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.06);
+
+    min-width: 0;
 }
 
-/* ===========================
-   Dashboard Cards
-=========================== */
+.card h2 {
 
-.cards{
+    margin: 0 0 8px;
 
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-    margin-bottom:30px;
+    color: #123b73;
 
+    font-size: 30px;
 }
 
-.card{
+.card p {
 
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    transition:.3s;
+    margin: 0;
 
+    color: #667085;
+
+    font-size: 16px;
 }
 
-.card:hover{
 
-    transform:translateY(-6px);
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
+/* =========================================
+   SEARCH / FILTER
+   ========================================= */
 
+.toolbar {
+
+    display: flex;
+
+    gap: 14px;
+
+    background: white;
+
+    padding: 17px;
+
+    border-radius: 15px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
-.card h2{
+.toolbar input,
+.toolbar select {
 
-    color:#0d2b5c;
-    font-size:34px;
-    margin-bottom:10px;
+    padding: 13px;
 
+    border: 1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
 }
 
-.card p{
+.toolbar input {
 
-    color:#666;
-    font-size:15px;
-
+    flex: 1;
+    min-width: 0;
 }
 
-/* ===========================
-   Search Box
-=========================== */
+.toolbar select {
 
-.search-section{
-
-    margin-bottom:25px;
-
+    min-width: 135px;
 }
 
-#searchBox{
+.toolbar input:focus,
+.toolbar select:focus {
 
-    width:100%;
-    padding:15px 20px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
-    outline:none;
-    transition:.3s;
-
+    border-color: #123b73;
 }
 
-#searchBox:focus{
 
-    border-color:#0d2b5c;
-    box-shadow:0 0 10px rgba(13,43,92,.15);
+/* =========================================
+   DASHBOARD CONTENT
+   ========================================= */
 
+/*
+   Important:
+   Recent Agreements ला पूर्ण width मिळेल.
+   त्यामुळे Agreement No / Owner / Action
+   कट होणार नाहीत.
+*/
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    width: 100%;
 }
 
-/* ===========================
-   Dashboard Content
-=========================== */
 
-.dashboard-content{
+/* =========================================
+   RECENT AGREEMENTS
+   ========================================= */
 
-    display:grid;
-    grid-template-columns:3fr 1fr;
-    gap:25px;
+.table-card {
 
+    width: 100%;
+
+    min-width: 0;
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
-/* ===========================
-   Table
-=========================== */
+.section-header {
 
-.table-container{
+    display: flex;
 
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    justify-content: space-between;
+    align-items: center;
 
+    gap: 15px;
+
+    margin-bottom: 20px;
 }
 
-.section-header{
+.section-header h2 {
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+    margin: 0;
 
+    color: #123b73;
+
+    font-size: 27px;
 }
 
-.section-header h2{
+.new-btn {
 
-    color:#0d2b5c;
+    display: inline-block;
 
+    background: #123b73;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 11px 17px;
+
+    border-radius: 9px;
+
+    white-space: nowrap;
 }
 
-.new-btn{
 
-    background:#0d2b5c;
-    color:white;
-    text-decoration:none;
-    padding:10px 18px;
-    border-radius:8px;
-    font-weight:bold;
+/* =========================================
+   TABLE WRAPPER
+   ========================================= */
 
+.table-wrap {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    border-radius: 8px;
+
+    scrollbar-width: thin;
 }
 
-.new-btn:hover{
 
-    background:#f4b400;
-    color:black;
+/* =========================================
+   TABLE
+   ========================================= */
 
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+
+    min-width: 1050px;
 }
 
-#agreementTable{
+thead {
 
-    width:100%;
-    border-collapse:collapse;
-
+    background: #f8fafc;
 }
 
-#agreementTable th{
+th,
+td {
 
-    background:#0d2b5c;
-    color:white;
-    padding:14px;
-    text-align:left;
+    padding: 14px 12px;
 
+    border-bottom:
+        1px solid #eaecf0;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
 }
 
-#agreementTable td{
+th {
 
-    padding:14px;
-    border-bottom:1px solid #e5e5e5;
+    color: #172b4d;
 
+    font-weight: 700;
+
+    font-size: 14px;
 }
 
-#agreementTable tr:hover{
+td {
 
-    background:#f8f9fc;
-
+    font-size: 14px;
 }
 
-#agreementTable button{
 
-    padding:7px 12px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    margin-right:5px;
+/* Agreement No */
 
+th:nth-child(1),
+td:nth-child(1) {
+
+    min-width: 135px;
 }
 
-/* Right Panel */
 
-.right-panel{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+/* Owner */
+
+th:nth-child(2),
+td:nth-child(2) {
+
+    min-width: 130px;
 }
 
-.alert-box{
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+/* Tenant */
+
+th:nth-child(3),
+td:nth-child(3) {
+
+    min-width: 130px;
 }
 
-.alert-box h3{
-    color:#0d2b5c;
-    margin-bottom:15px;
+
+/* Mobile */
+
+th:nth-child(4),
+td:nth-child(4) {
+
+    min-width: 120px;
 }
 
-/* Action Buttons */
 
-.view-btn{
-    background:#0d6efd;
-    color:#fff;
+/* Project */
+
+th:nth-child(5),
+td:nth-child(5) {
+
+    min-width: 135px;
 }
 
-.edit-btn{
-    background:#198754;
-    color:#fff;
+
+/* End Date */
+
+th:nth-child(6),
+td:nth-child(6) {
+
+    min-width: 110px;
 }
 
-.delete-btn{
-    background:#dc3545;
-    color:#fff;
-}
-
-.view-btn,
-.edit-btn,
-.delete-btn{
-
-    border:none;
-    padding:8px 12px;
-    border-radius:6px;
-    cursor:pointer;
-    margin:2px;
-}
-
-.view-btn:hover,
-.edit-btn:hover,
-.delete-btn:hover{
-
-    opacity:.9;
-
-}
 
 /* Status */
 
-.status-active{
+th:nth-child(7),
+td:nth-child(7) {
 
-    background:#198754;
-    color:#fff;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:13px;
-
+    min-width: 90px;
 }
 
-.status-expired{
 
-    background:#dc3545;
-    color:#fff;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:13px;
+/* Rent */
 
+th:nth-child(8),
+td:nth-child(8) {
+
+    min-width: 100px;
 }
 
-/* Responsive */
 
-@media(max-width:992px){
+/* Action */
 
-.dashboard-content{
+th:nth-child(9),
+td:nth-child(9) {
 
-grid-template-columns:1fr;
-
+    min-width: 205px;
 }
 
-.main{
 
-margin-left:0;
-width:100%;
+/* =========================================
+   STATUS
+   ========================================= */
 
-}
+.status {
 
-.sidebar{
-
-position:relative;
-width:100%;
-min-height:auto;
-
-}
-
-body{
-
-display:block;
-
-}
-
-}
-
-.toolbar{
-display:flex;
-gap:15px;
-margin:20px 0;
-}
-
-.toolbar input{
-width:300px;
-padding:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-.toolbar select{
-padding:10px;
-border-radius:8px;
-}
-
-.active{
-    background: #d4edda;
-    color: #155724;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: bold;
     display: inline-block;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
 }
 
-.expiring{
-    background: #fff3cd;
-    color: #856404;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    display: inline-block;
+.status.active {
+
+    background: #dcfae6;
+    color: #067647;
 }
 
-.expired{
-    background: #f8d7da;
-    color: #721c24;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    display: inline-block;
+.status.expiring {
+
+    background: #fef0c7;
+    color: #b54708;
+}
+
+.status.expired {
+
+    background: #fee4e2;
+    color: #b42318;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+   ========================================= */
+
+td button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 8px 10px;
+
+    margin-right: 5px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    background: #f1f3f5;
+
+    transition: 0.2s;
+}
+
+td button:hover {
+
+    background: #dce6f5;
+}
+
+
+/* =========================================
+   RIGHT PANEL
+   ========================================= */
+
+/*
+   आता Renewal Alerts आणि Quick Statistics
+   table च्या खाली side-by-side दिसतील.
+*/
+
+.right-panel {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+.alert-box {
+
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.alert-box h3 {
+
+    margin-top: 0;
+
+    color: #123b73;
+
+    font-size: 20px;
+}
+
+.renewal-item {
+
+    padding: 10px 0;
+
+    border-bottom:
+        1px solid #eee;
+}
+
+.renewal-item:last-child {
+
+    border-bottom: none;
+}
+
+
+/* =========================================
+   TABLE SCROLLBAR
+   ========================================= */
+
+.table-wrap::-webkit-scrollbar {
+
+    height: 8px;
+}
+
+.table-wrap::-webkit-scrollbar-track {
+
+    background: #f1f3f5;
+}
+
+.table-wrap::-webkit-scrollbar-thumb {
+
+    background: #b8c3d4;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    .sidebar {
+
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+    .main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+        padding: 18px;
+    }
+
+    .topbar {
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        flex-direction: column;
+    }
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .toolbar {
+
+        flex-direction: column;
+    }
+
+    .toolbar select {
+
+        width: 100%;
+    }
+
+    .section-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .right-panel {
+
+        grid-template-columns: 1fr;
+    }
+
+    .table-card {
+
+        padding: 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .cards {
+
+        grid-template-columns: 1fr;
+    }
+
+    .topbar h1 {
+
+        font-size: 28px;
+    }
+}
+
+/* =========================================
+   DESKTOP TABLE COMPACT FIX
+   ========================================= */
+
+@media (min-width: 1200px) {
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) 300px;
+        align-items: start;
+    }
+
+    .table-card {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .table-wrap {
+        overflow-x: visible;
+    }
+
+    table {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        padding: 11px 8px;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Agreement No */
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 13%;
+    }
+
+    /* Owner */
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: 13%;
+    }
+
+    /* Tenant */
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 11%;
+    }
+
+    /* Mobile */
+    th:nth-child(4),
+    td:nth-child(4) {
+        width: 12%;
+    }
+
+    /* Project */
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 12%;
+    }
+
+    /* End Date */
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 11%;
+    }
+
+    /* Status */
+    th:nth-child(7),
+    td:nth-child(7) {
+        width: 8%;
+    }
+
+    /* Rent */
+    th:nth-child(8),
+    td:nth-child(8) {
+        width: 9%;
+    }
+
+    /* Action */
+    th:nth-child(9),
+    td:nth-child(9) {
+        width: 17%;
+        overflow: visible;
+    }
+
+    td button {
+        padding: 6px 7px;
+        margin-right: 3px;
+        font-size: 12px;
+    }
+
+    .status {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   SMALL SCREEN TABLE SCROLL
+   ========================================= */
+
+@media (max-width: 1199px) {
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 1050px;
+        table-layout: auto;
+    }
+
+    th,
+    td {
+        white-space: nowrap;
+    }
+}
+
+/* FINAL DASHBOARD LAYOUT FIX */
+
+@media (min-width: 1200px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .right-panel {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        width: 100%;
+    }
+
+    .table-wrap {
+        overflow-x: visible;
+    }
+
+    table {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        font-size: 13px;
+        padding: 11px 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 13%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: 13%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 11%;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+        width: 12%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 12%;
+    }
+
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 11%;
+    }
+
+    th:nth-child(7),
+    td:nth-child(7) {
+        width: 8%;
+    }
+
+    th:nth-child(8),
+    td:nth-child(8) {
+        width: 9%;
+    }
+
+    th:nth-child(9),
+    td:nth-child(9) {
+        width: 17%;
+        overflow: visible;
+    }
+
+    td button {
+        padding: 6px 7px;
+        margin-right: 3px;
+        font-size: 12px;
+    }
 }

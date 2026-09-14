@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Properties | Agreement Hub CRM</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/properties.css?v=2">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Agreement Hub</h2>
+            <p>CRM Dashboard</p>
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+
+            <a href="client-form.html?mode=new">
+                ➕ New Agreement
+            </a>
+
+            <a href="clients.html">
+                👥 Clients
+            </a>
+
+            <a class="active" href="properties.html">
+                🏠 Properties
+            </a>
+
+            <a href="payments.html">
+                💰 Payments
+            </a>
+
+            <a href="reports.html">
+                📄 Reports
+            </a>
+
+            <a href="settings.html">
+                ⚙ Settings
+            </a>
+
+            <a href="index.html">
+                🌐 Website
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h1>Properties</h1>
+                <p>Manage Owner Properties</p>
+            </div>
+
+            <button
+                class="logout"
+                id="logoutBtn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <section class="property-summary">
+
+            <div class="card">
+                <h2 id="totalProperties">0</h2>
+                <p>Total Properties</p>
+            </div>
+
+            <div class="card">
+                <h2 id="availableProperties">0</h2>
+                <p>Available</p>
+            </div>
+
+            <div class="card">
+                <h2 id="occupiedProperties">0</h2>
+                <p>Occupied</p>
+            </div>
+
+        </section>
+
+
+        <section class="property-toolbar">
+
+            <input
+                type="text"
+                id="propertySearch"
+                placeholder="Search Owner, Mobile, Project, Flat or Area"
+            >
+
+            <select id="propertyStatusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="available">
+                    Available
+                </option>
+
+                <option value="occupied">
+                    Occupied
+                </option>
+
+            </select>
+
+            <button
+                type="button"
+                id="addPropertyBtn"
+                class="primary-btn"
+            >
+                + Add Property
+            </button>
+
+        </section>
+
+
+        <section class="property-table-card">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Property List</h2>
+                    <p id="propertyCount">0 Properties</p>
+                </div>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table id="propertyTable">
+
+                    <thead>
+
+                        <tr>
+                            <th>Property ID</th>
+                            <th>Owner</th>
+                            <th>Mobile</th>
+                            <th>Type</th>
+                            <th>Project / Society</th>
+                            <th>Flat / Unit</th>
+                            <th>Area</th>
+                            <th>Rent</th>
+                            <th>Deposit</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td
+                                colspan="11"
+                                class="empty-row"
+                            >
+                                Loading Properties...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <div
+        class="property-modal"
+        id="propertyModal"
+    >
+
+        <div class="property-modal-box">
+
+            <div class="modal-header">
+
+                <h2 id="propertyModalTitle">
+                    Add Property
+                </h2>
+
+                <button
+                    type="button"
+                    id="closePropertyModal"
+                    class="modal-close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="propertyForm">
+
+                <input
+                    type="hidden"
+                    id="editingPropertyId"
+                >
+
+
+                <div class="form-grid">
+
+                    <div>
+                        <label>Owner Name</label>
+
+                        <input
+                            type="text"
+                            id="ownerName"
+                            required
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Owner Mobile</label>
+
+                        <input
+                            type="tel"
+                            id="ownerMobile"
+                            maxlength="10"
+                            required
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Property Type</label>
+
+                        <select
+                            id="propertyType"
+                            required
+                        >
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="1 BHK">
+                                1 BHK
+                            </option>
+
+                            <option value="2 BHK">
+                                2 BHK
+                            </option>
+
+                            <option value="3 BHK">
+                                3 BHK
+                            </option>
+
+                            <option value="4 BHK">
+                                4 BHK
+                            </option>
+
+                            <option value="Studio">
+                                Studio
+                            </option>
+
+                            <option value="Commercial">
+                                Commercial
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label>Project / Society</label>
+
+                        <input
+                            type="text"
+                            id="projectName"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Flat / Unit No.</label>
+
+                        <input
+                            type="text"
+                            id="flatNumber"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Area / Locality</label>
+
+                        <input
+                            type="text"
+                            id="area"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Monthly Rent</label>
+
+                        <input
+                            type="number"
+                            id="monthlyRent"
+                            min="0"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Security Deposit</label>
+
+                        <input
+                            type="number"
+                            id="securityDeposit"
+                            min="0"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Status</label>
+
+                        <select id="propertyStatus">
+
+                            <option value="available">
+                                Available
+                            </option>
+
+                            <option value="occupied">
+                                Occupied
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="full-width">
+
+                        <label>Full Address</label>
+
+                        <textarea
+                            id="propertyAddress"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        id="cancelPropertyBtn"
+                        class="secondary-btn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Property
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/properties.js"
+    ></script>
+
+</body>
+
+</html>
