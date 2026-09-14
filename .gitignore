@@ -67,3 +67,7 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+deployed-client-form.js
+live-client-form-v4.js
+live-v6.js
