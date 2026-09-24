@@ -854,6 +854,37 @@ form.addEventListener(
                     new Date()
                         .toISOString();
 
+                        // Renewal tracking
+const renewAgreementId =
+    localStorage.getItem(
+        "renewAgreementId"
+    );
+
+if (renewAgreementId) {
+
+    const oldAgreementSnap =
+        await getDoc(
+            doc(
+                db,
+                "agreements",
+                renewAgreementId
+            )
+        );
+
+    if (oldAgreementSnap.exists()) {
+
+        const oldAgreement =
+            oldAgreementSnap.data();
+
+        agreement.renewedFrom =
+            renewAgreementId;
+
+        agreement.renewedFromAgreementNumber =
+            oldAgreement.agreementNumber || "";
+
+    }
+
+}
 
                 agreement.createdBy =
                     user.uid;
@@ -871,6 +902,31 @@ form.addEventListener(
 
                     );
 
+// Mark old agreement as renewed
+if (renewAgreementId) {
+
+    await updateDoc(
+        doc(
+            db,
+            "agreements",
+            renewAgreementId
+        ),
+        {
+            renewalStatus:
+                "Renewed",
+
+            renewedTo:
+                agreementRef.id,
+
+            renewedToAgreementNumber:
+                agreement.agreementNumber,
+
+            renewedAt:
+                new Date().toISOString()
+        }
+    );
+
+}
 
                 // Auto Create / Update Client
 
@@ -882,6 +938,9 @@ form.addEventListener(
 
                 );
 
+localStorage.removeItem(
+    "renewAgreementId"
+);
 
                 alert(
                     "Agreement Saved Successfully!"
@@ -1289,6 +1348,291 @@ async function generateAgreementNumber() {
 
 }
 
+// ==========================================
+// LOAD AGREEMENT FOR RENEWAL
+// ==========================================
+
+async function loadRenewAgreement() {
+
+    const renewAgreementId =
+        localStorage.getItem(
+            "renewAgreementId"
+        );
+
+
+    if (
+        !renewAgreementId
+    ) {
+        return false;
+    }
+
+
+    try {
+
+        const agreementRef =
+            doc(
+                db,
+                "agreements",
+                renewAgreementId
+            );
+
+
+        const agreementSnap =
+            await getDoc(
+                agreementRef
+            );
+
+
+        if (
+            !agreementSnap.exists()
+        ) {
+
+            localStorage.removeItem(
+                "renewAgreementId"
+            );
+
+            alert(
+                "Renewal agreement not found."
+            );
+
+            return false;
+
+        }
+
+
+        const agreement =
+            agreementSnap.data();
+
+
+        const mapping = {
+
+            duration:
+                "duration",
+
+            owner:
+                "ownerName",
+
+            ownerMobile:
+                "ownerMobile",
+
+            ownerEmail:
+                "ownerEmail",
+
+            ownerAadhaar:
+                "ownerAadhaar",
+
+            ownerPan:
+                "ownerPan",
+
+            ownerAge:
+                "ownerAge",
+
+            ownerOccupation:
+                "ownerOccupation",
+
+            ownerAddress:
+                "ownerAddress",
+
+            tenant:
+                "tenantName",
+
+            mobile:
+                "mobileNumber",
+
+            tenantEmail:
+                "tenantEmail",
+
+            tenantAadhaar:
+                "tenantAadhaar",
+
+            tenantPan:
+                "tenantPan",
+
+            tenantAge:
+                "tenantAge",
+
+            tenantOccupation:
+                "tenantOccupation",
+
+            tenantAddress:
+                "tenantAddress",
+
+            projectName:
+                "projectName",
+
+            flatNumber:
+                "flatNumber",
+
+            buildingName:
+                "buildingName",
+
+            wing:
+                "wing",
+
+            floor:
+                "floor",
+
+            area:
+                "area",
+
+            surveyNumber:
+                "surveyNumber",
+
+            ctsNumber:
+                "ctsNumber",
+
+            village:
+                "village",
+
+            taluka:
+                "taluka",
+
+            district:
+                "district",
+
+            pinCode:
+                "pinCode",
+
+            propertyAddress:
+                "propertyAddress",
+
+            rent:
+                "rent",
+
+            deposit:
+                "deposit",
+
+            maintenance:
+                "maintenance",
+
+            lockIn:
+                "lockIn",
+
+            noticePeriod:
+                "noticePeriod",
+
+            witness1Name:
+                "witness1Name",
+
+            witness1Mobile:
+                "witness1Mobile",
+
+            witness2Name:
+                "witness2Name",
+
+            witness2Mobile:
+                "witness2Mobile",
+
+            stampDuty:
+                "stampDuty",
+
+            registrationFee:
+                "registrationFee",
+
+            agreementCharges:
+                "agreementCharges",
+
+            serviceCharge:
+                "serviceCharge",
+
+            brokerage:
+                "brokerage"
+
+        };
+
+
+        Object.entries(
+            mapping
+        ).forEach(
+            ([key, id]) => {
+
+                const element =
+                    document.getElementById(
+                        id
+                    );
+
+
+                if (element) {
+
+                    element.value =
+                        agreement[key] ??
+                        "";
+
+                }
+
+            }
+        );
+
+
+        const selectedClauses =
+            agreement.selectedClauses ||
+            [];
+
+
+        document.querySelectorAll(
+            'input[name="clause"]'
+        ).forEach(
+            checkbox => {
+
+                checkbox.checked =
+                    selectedClauses
+                        .includes(
+                            checkbox.value
+                        );
+
+            }
+        );
+
+
+        // Renewal = NEW agreement
+        // Do NOT reuse old dates or agreement number
+
+        const startDate =
+            document.getElementById(
+                "startDate"
+            );
+
+        const endDate =
+            document.getElementById(
+                "endDate"
+            );
+
+
+        if (startDate) {
+            startDate.value = "";
+        }
+
+
+        if (endDate) {
+            endDate.value = "";
+        }
+
+
+        await generateAgreementNumber();
+
+
+        console.log(
+            "Renewal data loaded from:",
+            renewAgreementId
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "RENEW AGREEMENT LOAD ERROR:",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
 
 // ==========================================
 // LOAD DEFAULT AGREEMENT SETTINGS
@@ -1737,22 +2081,46 @@ async function initializeAgreementForm() {
         );
 
     const mode =
-        params.get("mode");
+    params.get("mode");
 
 
-    // New Agreement explicitly requested
-    if (mode === "new") {
+// New Agreement explicitly requested
+if (mode === "new") {
 
-        localStorage.removeItem(
-            "editAgreementId"
-        );
+    localStorage.removeItem(
+        "editAgreementId"
+    );
 
-    }
+    localStorage.removeItem(
+        "renewAgreementId"
+    );
 
+}
+
+
+const renewAgreementId =
+    localStorage.getItem(
+        "renewAgreementId"
+    );
+
+
+if (renewAgreementId) {
+
+    localStorage.removeItem(
+        "editAgreementId"
+    );
+
+    await loadAgreementDefaults();
+
+    await loadRenewAgreement();
+
+} else {
 
     await loadAgreementDefaults();
 
     await loadEditAgreement();
+
+}
 
 }
 

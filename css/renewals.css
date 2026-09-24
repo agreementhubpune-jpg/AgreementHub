@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172b4d;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    background: #123b73;
+    color: #ffffff;
+    padding: 26px 18px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo h2 {
+    margin-bottom: 5px;
+}
+
+.logo p {
+    margin: 0;
+    color: #dce6f5;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 13px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: #ffbd00;
+    color: #111111;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    margin-bottom: 5px;
+}
+
+.topbar p {
+    margin: 0;
+    color: #667085;
+}
+
+.topbar a {
+    color: #123b73;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(180px, 1fr)
+        );
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow:
+        0 6px 20px
+        rgba(0, 0, 0, 0.06);
+}
+
+.summary-card span {
+    display: block;
+    font-weight: 700;
+    color: #667085;
+}
+
+.summary-card strong {
+    display: block;
+    font-size: 30px;
+    margin: 10px 0 5px;
+    color: #123b73;
+}
+
+.summary-card small {
+    color: #667085;
+}
+
+.expired-card strong {
+    color: #c62828;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.panel {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow:
+        0 6px 20px
+        rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.filters input,
+.filters select {
+    padding: 11px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.filters input {
+    flex: 1;
+}
+
+.filters select {
+    min-width: 190px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eeeeee;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #f7f9fc;
+    color: #344054;
+    font-size: 14px;
+}
+
+td {
+    font-size: 14px;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-expired {
+    background: #fde8e8;
+    color: #b42318;
+}
+
+.status-urgent {
+    background: #fff1db;
+    color: #b54708;
+}
+
+.status-warning {
+    background: #fff8cc;
+    color: #7a5d00;
+}
+
+.status-renewal {
+    background: #e7f0ff;
+    color: #175cd3;
+}
+
+
+/* =========================
+   DAYS
+========================= */
+
+.days-expired {
+    color: #b42318;
+    font-weight: 700;
+}
+
+.days-urgent {
+    color: #b54708;
+    font-weight: 700;
+}
+
+.days-normal {
+    color: #175cd3;
+    font-weight: 700;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.action-group {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.whatsapp-btn {
+    background: #1fa855;
+    color: #ffffff;
+}
+
+.view-btn {
+    background: #123b73;
+    color: #ffffff;
+}
+
+
+/* =========================
+   EMPTY MESSAGE
+========================= */
+
+.empty-message {
+    text-align: center;
+    padding: 25px;
+    color: #667085;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (
+    max-width: 1000px
+) {
+
+    .summary-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(180px, 1fr)
+            );
+    }
+
+}
+
+
+@media (
+    max-width: 850px
+) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters select {
+        width: 100%;
+    }
+
+}
+
+
+@media (
+    max-width: 520px
+) {
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

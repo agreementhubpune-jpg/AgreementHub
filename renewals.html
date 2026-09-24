@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Agreement Hub - Renewals
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/renewals.css"
+    >
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>
+                Agreement Hub
+            </h2>
+
+            <p>
+                CRM Dashboard
+            </p>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="client-form.html">
+                New Agreement
+            </a>
+
+            <a href="clients.html">
+                Clients
+            </a>
+
+            <a href="properties.html">
+                Properties
+            </a>
+
+            <a href="payments.html">
+                Payments
+            </a>
+
+            <a href="reports.html">
+                Reports
+            </a>
+
+            <a
+                class="active"
+                href="renewals.html"
+            >
+                Renewals
+            </a>
+
+            <a href="settings.html">
+                Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Renewal Management
+                </h1>
+
+                <p>
+                    Track expiring agreements and contact clients for renewal
+                </p>
+
+            </div>
+
+            <a href="dashboard.html">
+                Back to Dashboard
+            </a>
+
+        </header>
+
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <span>
+                    Renewal Alert
+                </span>
+
+                <strong id="alertCount">
+                    0
+                </strong>
+
+                <small id="alertDaysText">
+                    Next 30 Days
+                </small>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Next 15 Days
+                </span>
+
+                <strong id="fifteenCount">
+                    0
+                </strong>
+
+                <small>
+                    Follow-up Priority
+                </small>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Next 7 Days
+                </span>
+
+                <strong id="sevenCount">
+                    0
+                </strong>
+
+                <small>
+                    Urgent Renewal
+                </small>
+
+            </div>
+
+
+            <div class="summary-card expired-card">
+
+                <span>
+                    Expired
+                </span>
+
+                <strong id="expiredCount">
+                    0
+                </strong>
+
+                <small>
+                    Renewal Pending
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="renewalSearch"
+                    placeholder="Search Agreement, Client, Mobile or Project"
+                >
+
+
+                <select id="renewalFilter">
+
+                    <option value="all">
+                        All Renewal Records
+                    </option>
+
+                    <option value="alert">
+                        Renewal Alert
+                    </option>
+
+                    <option value="15">
+                        Next 15 Days
+                    </option>
+
+                    <option value="7">
+                        Next 7 Days
+                    </option>
+
+                    <option value="expired">
+                        Expired
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table id="renewalTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Agreement No
+                            </th>
+
+                            <th>
+                                Client
+                            </th>
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Project
+                            </th>
+
+                            <th>
+                                End Date
+                            </th>
+
+                            <th>
+                                Days Left
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p
+                id="emptyMessage"
+                class="empty-message"
+                style="display:none;"
+            >
+                No renewal records found.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/renewals.js"
+    ></script>
+
+</body>
+
+</html>
